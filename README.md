@@ -2,7 +2,7 @@
 
 **Student:** Briant Woolley
 **Semester:** Fall semester of 2026
-**Live Site:** [View Site](https://your-username.github.io/your-repo-name/)
+**Live Site:** [View Site](https://briantlev1.github.io/Portfolio/)
 
 ## About
 
