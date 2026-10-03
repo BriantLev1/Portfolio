@@ -1,0 +1,9 @@
+/* Color tokens: define all color values for the site.
+   Name by purpose (--color-primary, --color-surface)
+   not appearance (--blue, --light-gray). */
+:root {
+     --color-primary: #2563eb;     /* main brand color: buttons, links, key UI */
+    --color-background: #ffffff;  /* page and surface background */
+    --color-text: #1f2937;        /* body copy and headings */
+    --color-accent: #f59e0b;      /* highlights, badges, secondary calls to action */
+}

@@ -1,0 +1,58 @@
+/* Card components: .card-group, .cards grid, .card, .card-tag, .card-footer
+   Use native nesting. Reference tokens with var(). */
+
+.card-group {
+    margin-block: var(--space-large);
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    gap: clamp(var(--space-small), 3vw, var(--space-large));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-small);
+    padding: clamp(var(--space-medium), 3vw, var(--space-large));
+    border: 1px solid color-mix(in srgb, var(--color-text) 20%, transparent);
+    border-radius: var(--radius-base);
+    background: var(--color-background);
+    color: var(--color-text);
+
+    &:hover {
+        box-shadow: 0 4px 12px color-mix(in srgb, var(--color-text) 15%, transparent);
+    }
+
+    h3 {
+        margin: 0;
+        font-size: clamp(1.125rem, 1rem + 1vw, 1.5rem);
+    }
+
+    p {
+        margin: 0;
+    }
+
+    .card-tag {
+        align-self: flex-start;
+        padding: 0.125rem var(--space-small);
+        border-radius: var(--radius-base);
+        background: var(--color-accent);
+        color: var(--color-text);
+        font-size: 0.875rem;
+        font-weight: 600;
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: auto;
+        padding-top: var(--space-small);
+        border-top: 1px solid color-mix(in srgb, var(--color-text) 20%, transparent);
+    }
+}
