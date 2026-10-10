@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>::part() and ::slotted() Demo</title>
+
+    <!--
+        OUTER PAGE STYLESHEET
+        This is the "consumer" side. It can reach the card's exposed parts
+        with ::part(), but nothing else inside the shadow tree.
+    -->
+    <style>
+        :root {
+            --color-primary: #1d4e89;
+            --color-accent: #c8553d;
+            --color-surface: #f6f4ef;
+            --color-ink: #1f2430;
+            --color-muted: #5b6272;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+            color: var(--color-ink);
+            background: var(--color-surface);
+            line-height: 1.6;
+        }
+
+        .page {
+            max-width: 62rem;
+            margin: 0 auto;
+            padding: 2rem 1.25rem 4rem;
+        }
+
+        .page-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            margin: 0 0 0.5rem;
+            color: var(--color-primary);
+        }
+
+        .intro {
+            max-width: 42rem;
+            color: var(--color-muted);
+            margin: 0 0 2rem;
+        }
+
+        .demo-title {
+            font-size: 1.25rem;
+            margin: 2.5rem 0 0.25rem;
+        }
+
+        .demo-note {
+            margin: 0 0 1rem;
+            color: var(--color-muted);
+            max-width: 46rem;
+        }
+
+        .demo-note code,
+        .intro code {
+            background: #e7e3d8;
+            padding: 0.1em 0.35em;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .grid {
+            display: grid;
+            gap: 1.25rem;
+            grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+        }
+
+        /* ------------------------------------------------------------
+           ::part() — the outer page restyles the exposed parts.
+           Each part name needs its own selector; no combinators allowed.
+           ------------------------------------------------------------ */
+        info-card::part(header) {
+            background: var(--color-primary);
+            color: #fff;
+            padding: 1rem 1.25rem;
+        }
+
+        info-card::part(body) {
+            padding: 1rem 1.25rem;
+        }
+
+        info-card::part(footer) {
+            font-size: 0.8rem;
+            font-style: italic;
+            padding: 0.75rem 1.25rem;
+            border-top: 1px dashed #b9b4a5;
+        }
+
+        /* Same part, different look: the consumer picks a variant per instance. */
+        info-card.warm::part(header) {
+            background: var(--color-accent);
+            font-family: Georgia, "Times New Roman", serif;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        info-card.warm::part(footer) {
+            background: #fbeee9;
+            color: var(--color-accent);
+        }
+
+        /* A part with two names ("footer meta") can be targeted by either one. */
+        info-card::part(meta) {
+            color: var(--color-muted);
+        }
+
+        /* ------------------------------------------------------------
+           Cascade gotcha: this is a normal outer-page rule aimed at
+           slotted content. It beats ::slotted(p) from inside the shadow
+           tree, because outer styles win over styles from the shadow tree.
+           ------------------------------------------------------------ */
+        info-card.outer-wins p {
+            color: #b00020;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <h1 class="page-title">::part() and ::slotted()</h1>
+        <p class="intro">
+            Below is a custom element, <code>&lt;info-card&gt;</code>, built with an open
+            shadow root. The component exposes named <code>part</code> attributes for the outer
+            page to restyle, and uses <code>::slotted()</code> internally to style whatever
+            content is passed into its slots.
+        </p>
+
+        <h2 class="demo-title">1. Both pseudo-elements working together</h2>
+        <p class="demo-note">
+            The blue header comes from <code>info-card::part(header)</code> in the page's
+            stylesheet. The heading color and paragraph spacing come from
+            <code>::slotted(h2)</code> and <code>::slotted(p)</code> inside the shadow tree.
+        </p>
+        <div class="grid">
+            <info-card>
+                <h2 slot="heading">Salt Lake Temple</h2>
+                <p>Dedicated April 6, 1893, after 40 years of construction.</p>
+                <p class="highlight">Granite blocks were hauled from Little Cottonwood Canyon.</p>
+                <span slot="footer">Source: Temple Square archives</span>
+            </info-card>
+
+            <info-card class="warm">
+                <h2 slot="heading">Same component, new look</h2>
+                <p>
+                    The markup is just as simple. Only the outer
+                    <code>::part()</code> rules changed, scoped by a <code>.warm</code> class.
+                </p>
+                <p class="highlight">The shadow tree's internals stayed untouched.</p>
+                <span slot="footer">Variant: warm</span>
+            </info-card>
+        </div>
+
+        <h2 class="demo-title">2. Slot fallback content</h2>
+        <p class="demo-note">
+            This card passes in nothing at all. Every <code>&lt;slot&gt;</code> shows its
+            fallback content instead.
+        </p>
+        <div class="grid">
+            <info-card></info-card>
+        </div>
+
+        <h2 class="demo-title">3. The cascade gotcha</h2>
+        <p class="demo-note">
+            The shadow stylesheet colors <code>::slotted(p)</code> gray, but this card's
+            paragraph is bold red. That comes from an ordinary outer-page rule,
+            <code>info-card.outer-wins p</code>. Slotted content lives in the light DOM, so the
+            outer page wins any conflict with <code>::slotted()</code>.
+        </p>
+        <div class="grid">
+            <info-card class="outer-wins">
+                <h2 slot="heading">Who wins?</h2>
+                <p>The page's own stylesheet overrides ::slotted() for this paragraph.</p>
+                <span slot="footer">Open DevTools to inspect the shadow root</span>
+            </info-card>
+        </div>
+    </main>
+
+    <!--
+        COMPONENT TEMPLATE
+        Stamped into the shadow root by the custom element below. Because it is a
+        <template>, the browser parses it but does not render it on the page.
+    -->
+    <template id="info-card-template">
+        <style>
+            /* Shadow stylesheet: these rules apply only inside this component. */
+            :host {
+                display: block;
+                background: #fff;
+                border: 1px solid #d8d3c4;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 2px 8px rgb(31 36 48 / 0.08);
+            }
+
+            /* Sensible defaults for the exposed parts; the outer page can override these. */
+            [part~="header"] {
+                background: #e9e6dc;
+                padding: 0.75rem 1rem;
+            }
+
+            [part~="body"] {
+                padding: 0.75rem 1rem;
+            }
+
+            [part~="footer"] {
+                padding: 0.5rem 1rem;
+                color: #5b6272;
+            }
+
+            /* ::slotted() styles the light DOM content projected into the slots above. */
+            ::slotted(h2) {
+                margin: 0;
+                font-size: 1.2rem;
+                color: inherit;
+            }
+
+            ::slotted(p) {
+                margin: 0 0 0.75rem;
+                line-height: 1.6;
+                color: #4a5060;
+            }
+
+            ::slotted(.highlight) {
+                border-left: 4px solid #c8553d;
+                padding-left: 0.75rem;
+                background: #fbeee9;
+            }
+        </style>
+
+        <article>
+            <header part="header">
+                <slot name="heading">Default Heading</slot>
+            </header>
+            <div part="body">
+                <slot>Default body content goes here.</slot>
+            </div>
+            <footer part="footer meta">
+                <slot name="footer">Default footer</slot>
+            </footer>
+        </article>
+    </template>
+
+    <script>
+        class InfoCard extends HTMLElement {
+            constructor() {
+                super();
+                // Open mode so DevTools (and element.shadowRoot) can see the tree.
+                const shadow = this.attachShadow({ mode: 'open' });
+                const template = document.getElementById('info-card-template');
+                shadow.appendChild(template.content.cloneNode(true));
+            }
+        }
+
+        customElements.define('info-card', InfoCard);
+    </script>
+</body>
+</html>
