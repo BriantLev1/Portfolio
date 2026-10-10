@@ -4,29 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Briant Woolley - Portfolio</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="page2" href="unit-1/custom-properties/index.html">
-    <link rel="page3" href="unit-2/layered-components/index.html">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <nav>
-    <h2>Assignments</h2>
-        <ul>
-            <li>
-                <a href="unit-1/custom-properties/index.html">
-                    Custom Properties and Nesting
-                </a>
-                <a href="unit-2/layered-components/index.html">
-                    Layered Components
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <head>
+    <header class="board-header">
         <h1>Briant Woolley</h1>
-        <p1>Hello I am from a small town in Arizona called Seligman. I am Currently a student at BYU-Idaho studing Software Engineering.
-            The purpose of this website is to present my projects and skills to potential employers. I have a big drive to learn as much as I can and to gain experiance as a Software Developer.
-        </p1>
-    </head>
+        <p>WDD 331R Advanced CSS</p>
+        <p>
+            Hello, I am from a small town in Arizona called Seligman. I am currently a student at
+            BYU-Idaho studying Software Engineering. The purpose of this website is to present my
+            projects and skills to potential employers. I have a big drive to learn as much as I can
+            and to gain experience as a Software Developer.
+        </p>
+    </header>
+
+    <main>
+        <section class="card-group">
+            <h2>Assignments</h2>
+            <div class="cards">
+                <article class="card">
+                    <span class="card-tag">Unit 1</span>
+                    <h3>Custom Properties and Nesting</h3>
+                    <p>Design tokens built with CSS custom properties and organized with native nesting.</p>
+                    <div class="card-meta">
+                        <span>Assignment</span>
+                        <a href="unit-1/custom-properties/index.html">View<span class="visually-hidden"> Custom Properties and Nesting</span></a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <span class="card-tag">Unit 2</span>
+                    <h3>Layered Components</h3>
+                    <p>Components organized with cascade layers so the order of styles stays predictable.</p>
+                    <div class="card-meta">
+                        <span>Assignment</span>
+                        <a href="unit-2/layered-components/index.html">View<span class="visually-hidden"> Layered Components</span></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="card-group">
+            <h2>Choose Topics</h2>
+            <div class="cards">
+                <article class="card">
+                    <span class="card-tag">Unit 2</span>
+                    <h3>::part() and ::slotted()</h3>
+                    <p>A Web Component demo showing how to style Shadow DOM content with ::part() and ::slotted().</p>
+                    <div class="card-meta">
+                        <span>Choose topic</span>
+                        <a href="unit-2/part-and-slotted/index.html">View<span class="visually-hidden"> ::part() and ::slotted()</span></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="board-footer">
+        <p>&copy; 2026 Briant Woolley &middot; WDD 331R Advanced CSS</p>
+    </footer>
 </body>
 </html>
