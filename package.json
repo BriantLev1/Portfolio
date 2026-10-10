@@ -1,0 +1,25 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "**Student:** Briant Woolley\r **Semester:** Fall semester of 2026\r **Live Site:** [View Site](https://briantlev1.github.io/Portfolio/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "lightningcss --minify --bundle \ncss/main.css -o dist/styles.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BriantLev1/Portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/BriantLev1/Portfolio/issues"
+  },
+  "homepage": "https://github.com/BriantLev1/Portfolio#readme",
+  "devDependencies": {
+    "lightningcss-cli": "^1.33.0"
+  }
+}
