@@ -1,0 +1,13 @@
+/* ========================================
+   COLOR TOKENS
+   Every color used across the site is
+   defined here and consumed with var().
+   ======================================== */
+:root {
+    --color-primary: #3454d1;
+    --color-background: #f6f7fb;
+    --color-surface: #ffffff;
+    --color-text: #1e2233;
+    --color-text-muted: #6b7280;
+    --color-accent: #ff9f1c;
+}

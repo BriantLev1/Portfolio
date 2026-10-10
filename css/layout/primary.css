@@ -1,0 +1,62 @@
+/* ========================================
+   LAYOUT: PAGE STRUCTURE
+   The page skeleton: navigation, header,
+   card sections, grid, and footer.
+   The .card component itself lives in
+   components/card.css.
+   ======================================== */
+
+/* Navigation */
+.site-nav {
+    padding: var(--space-sm) 0;
+    margin-bottom: var(--space-lg);
+    font-weight: 600;
+}
+
+/* Page header */
+.board-header {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    padding: var(--space-md) 0;
+
+    h1 {
+        font-size: clamp(1.75rem, 4vw + 1rem, 3rem);
+        color: var(--color-primary);
+        margin-bottom: var(--space-sm);
+    }
+
+    p {
+        color: var(--color-text-muted);
+        margin-top: var(--space-sm);
+    }
+}
+
+/* A section of cards (This Week, Coming Up, Announcements) */
+.card-group {
+    margin-bottom: var(--space-lg);
+
+    h2 {
+        font-size: 1.25rem;
+        color: var(--color-text);
+        border-bottom: 2px solid var(--color-accent);
+        padding-bottom: var(--space-sm);
+        margin-bottom: var(--space-md);
+        display: inline-block;
+    }
+}
+
+/* Responsive grid that holds the cards */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: calc(var(--space-sm) * 2);
+}
+
+/* Page footer */
+.board-footer {
+    text-align: center;
+    padding: var(--space-lg) 0;
+    color: var(--color-text-muted);
+    border-top: 1px solid #e2e4ea;
+    margin-top: var(--space-lg);
+}

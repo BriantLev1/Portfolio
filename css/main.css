@@ -1,34 +1,21 @@
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+/* Layer declaration: controls cascade order (must come before any @import) */
+@layer tokens, base, layout, components, utilities;
 
-:root {
-    --color-bg: #f4f6f8;
-    --color-text: #1e293b;
-    --color-primary: #006eb6;
-    --color-primary-hover: #004f7f;
-    --space-sm: 0.5rem;
-    --space-md: 1rem;
-    --space-lg: 2rem;
-    --font-body: system-ui, -apple-system, sans-serif;
-}
+/* Tokens */
+@import url('tokens/colors.css') layer(tokens);
+@import url('tokens/variables.css') layer(tokens);
 
-body {
-    font-family: var(--font-body);
-    color: var(--color-text);
-    background-color: var(--color-bg);
-    line-height: 1.6;
-    padding: var(--space-lg);
-}
+/* Base */
+@import url('base/reset.css') layer(base);
+@import url('base/elements.css') layer(base);
 
-a {
-    color: var(--color-primary);
-}
+/* Layout */
+@import url('layout/primary.css') layer(layout);
+ 
+/* Components (folder is empty for now; add imports here as files are created) */
+/* @import url('components/') layer(components); */
 
-a:hover {
-    color: var(--color-primary-hover);
-}
+/* Utilities */
+@import url('utilities/utilities.css') layer(utilities);
+
+/* Unlayered styles (rare, well commented overrides of last resort) go below */

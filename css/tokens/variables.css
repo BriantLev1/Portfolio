@@ -1,0 +1,19 @@
+/* ========================================
+   DESIGN TOKENS
+   Spacing, typography, borders, and every
+   other non-color design decision.
+   Colors live in tokens/colors.css.
+   ======================================== */
+:root {
+    /* Spacing */
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 2rem;
+
+    /* Typography */
+    --font-family-base: "Segoe UI", system-ui, -apple-system, sans-serif;
+    --font-size-base: 1rem;
+
+    /* Borders */
+    --radius-base: 0.5rem;
+}

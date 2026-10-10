@@ -1,0 +1,30 @@
+/* ========================================
+   ELEMENTS
+   Flat, top-level styles for bare HTML
+   tags. No classes in this file.
+   ======================================== */
+body {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    background: var(--color-background);
+    line-height: 1.6;
+    padding: clamp(1rem, 2vw + 0.5rem, 3rem);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    line-height: 1.2;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+
+    &:hover {
+        color: var(--color-accent);
+        text-decoration: underline;
+    }
+}
