@@ -5,15 +5,36 @@
    Colors live in tokens/colors.css.
    ======================================== */
 :root {
-    /* Spacing */
-    --space-sm: 0.5rem;
-    --space-md: 1rem;
-    --space-lg: 2rem;
-
     /* Typography */
-    --font-family-base: "Segoe UI", system-ui, -apple-system, sans-serif;
-    --font-size-base: 1rem;
+    --font-family-sans: system-ui, sans-serif;
+    --font-family-mono: monospace;
+    --font-size-sm: 1.4rem;
+    --font-size-md: 1.6rem;
+    --font-size-lg: 1.8rem;
 
-    /* Borders */
-    --radius-base: 0.5rem;
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+
+    /* Radii */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+
+    /* Transitions */
+    --transition-base: 0.2s ease;
+
+    /* Icons */
+    --icon-size-sm: 24px;
+    --icon-size-md: 32px;
+
+    /* Focus */
+    --outline-width: 2px;
+
+    --spacing-md: 16px;
+    /* Legacy name for backwards compatibility */
+    --space-md: var(--spacing-md);
 }

@@ -13,7 +13,7 @@
 @import url('layout/primary.css') layer(layout);
  
 /* Components (folder is empty for now; add imports here as files are created) */
-/* @import url('components/') layer(components); */
+@import url('components/theme-toggle.css') layer(components);
 
 /* Utilities */
 @import url('utilities/utilities.css') layer(utilities);

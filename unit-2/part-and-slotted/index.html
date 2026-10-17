@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>::part() and ::slotted() Demo</title>
+    <script src="js/theme-preference.js"></script>
 
     <!--
         OUTER PAGE STYLESHEET
@@ -126,6 +127,28 @@
 </head>
 <body>
     <main class="page">
+        <details class="theme-menu">
+    <summary class="theme-control">
+        <span class="visually-hidden">Color scheme</span>
+    </summary>
+    <div class="theme-extra" role="group" aria-label="Choose color scheme">
+        <label class="theme-control theme-pick" data-theme-pick="light">
+            <input name="theme-preference" type="radio" value="light">
+            <span aria-hidden="true">&#9788;&#65039;</span>
+            <span class="visually-hidden">Light</span>
+        </label>
+        <label class="theme-control theme-pick" data-theme-pick="system">
+            <input name="theme-preference" type="radio" value="system" checked>
+            <span aria-hidden="true">&#9881;&#65039;</span>
+            <span class="visually-hidden">System default</span>
+        </label>
+        <label class="theme-control theme-pick" data-theme-pick="dark">
+            <input name="theme-preference" type="radio" value="dark">
+            <span aria-hidden="true">&#127766;</span>
+            <span class="visually-hidden">Dark</span>
+        </label>
+    </div>
+</details>
         <h1 class="page-title">::part() and ::slotted()</h1>
         <p class="intro">
             Below is a custom element, <code>&lt;info-card&gt;</code>, built with an open

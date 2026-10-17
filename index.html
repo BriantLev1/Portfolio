@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Briant Woolley - Portfolio</title>
     <link rel="stylesheet" href="css/main.css">
+    <script src="js/theme-preference.js"></script>
 </head>
 <body>
     <header class="board-header">
@@ -17,6 +18,29 @@
             and to gain experience as a Software Developer.
         </p>
     </header>
+
+    <details class="theme-menu">
+    <summary class="theme-control">
+        <span class="visually-hidden">Color scheme</span>
+    </summary>
+    <div class="theme-extra" role="group" aria-label="Choose color scheme">
+        <label class="theme-control theme-pick" data-theme-pick="light">
+            <input name="theme-preference" type="radio" value="light">
+            <span aria-hidden="true">&#9788;&#65039;</span>
+            <span class="visually-hidden">Light</span>
+        </label>
+        <label class="theme-control theme-pick" data-theme-pick="system">
+            <input name="theme-preference" type="radio" value="system" checked>
+            <span aria-hidden="true">&#9881;&#65039;</span>
+            <span class="visually-hidden">System default</span>
+        </label>
+        <label class="theme-control theme-pick" data-theme-pick="dark">
+            <input name="theme-preference" type="radio" value="dark">
+            <span aria-hidden="true">&#127766;</span>
+            <span class="visually-hidden">Dark</span>
+        </label>
+    </div>
+</details>
 
     <main>
         <section class="card-group">
