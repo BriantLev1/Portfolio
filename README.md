@@ -18,6 +18,37 @@ every push to main.
 - [Layered Components](unit-2/layered-components/index.html)
 - [::part() and ::slotted()](unit-2/part-and-slotted/index.html)
 
+## Dark Mode
+
+The site supports **light mode, dark mode, and a system default** option. A gear/sun/moon
+toggle in the header opens a small menu where you pick a theme. The choice is saved in
+`localStorage` under the key `theme-preference`, so it persists between visits. With no
+saved choice, the site follows your operating system's light or dark setting.
+
+How it works:
+
+- **Color tokens** live in `css/tokens/colors.css`, in three parts:
+  1. **Seeds** (`--seed-*`): the raw, human-chosen colors. The accent seed is an `oklch()`
+     color, and the accent ramp (`--accent-200` through `--accent-800`) is generated from it
+     with `color-mix(in oklch, ...)`.
+  2. **Color-scheme switching rules**: `:has()` selectors that watch the checked
+     `theme-preference` radio button and set `color-scheme: dark` when needed.
+  3. **Semantic tokens** (`--color-*`): defined with `light-dark()`, so each token holds
+     both its light and dark value. These are the only color tokens that pages and
+     components should use (for example `var(--color-bg)` and `var(--color-text)`).
+- **The toggle** is a `<details>` menu with three radio inputs (light, system, dark),
+  styled in `css/components/theme-toggle.css`.
+- **Persistence** is handled by `js/theme-preference.js`, which restores the saved choice
+  before first paint (no flash of the wrong theme) and saves any new choice. It is loaded
+  in the `<head>` without `defer` or `async`, before the stylesheet:
+
+```html
+<script src="js/theme-preference.js"></script>
+<link rel="stylesheet" href="css/main.css">
+```
+
+To change the brand color, edit the hue in `--seed-accent` in `css/tokens/colors.css`.
+
 ## Project Structure
 
 ```
@@ -27,17 +58,20 @@ Portfolio/
 │   │   ├── elements.css      # Bare element styles (body, headings, links)
 │   │   └── reset.css         # Minimal CSS reset
 │   ├── components/
-│   │   └── card.css          # .card component
+│   │   ├── card.css          # .card component
+│   │   └── theme-toggle.css  # Light / system / dark theme toggle
 │   ├── layout/
 │   │   └── primary.css       # Page skeleton: header, card grid, footer
 │   ├── tokens/
-│   │   ├── colors.css        # Color custom properties
-│   │   └── variables.css     # Spacing, typography, radius, and other tokens
+│   │   ├── colors.css        # Seed, color-scheme, and semantic color tokens (light-dark)
+│   │   └── variables.css     # Spacing, typography, radius, transition, icon, and focus tokens
 │   ├── utilities/
 │   │   └── utilities.css     # Single-purpose helpers (.visually-hidden, .text-center)
 │   └── main.css              # Entry point: declares layer order and imports every file
 ├── dist/
 │   └── styles.css            # Bundled, minified build output (committed on purpose)
+├── js/
+│   └── theme-preference.js   # Restores and saves the theme choice (loaded in <head>)
 ├── unit-1/                   # Unit 1 assignments
 ├── unit-2/                   # Unit 2 assignments and choose topics
 ├── index.html                # Homepage
@@ -62,12 +96,14 @@ override components without `!important`.
 | `tokens` | `css/tokens/` | Custom properties for every design decision |
 | `base` | `css/base/` | The reset and bare HTML element styles |
 | `layout` | `css/layout/` | Page structure and composition |
-| `components` | `css/components/` | Styled UI pieces such as cards |
+| `components` | `css/components/` | Styled UI pieces such as cards and the theme toggle |
 | `utilities` | `css/utilities/` | Small helper classes |
 
 **Token-first:** colors live in `tokens/colors.css`, and everything else (spacing,
-typography, border radius) lives in `tokens/variables.css`. Other files reference
-tokens with `var()` instead of typing raw values.
+typography, border radius, transitions, icon sizes, focus outline) lives in
+`tokens/variables.css`. Other files reference tokens with `var()` instead of typing
+raw values. Any older token names are kept as aliases that point at the new names, so
+older declarations keep working while pages are migrated.
 
 **Adding a new file:** create it in the right folder, then add one `@import` line to
 `css/main.css` with the matching `layer()` assignment.
