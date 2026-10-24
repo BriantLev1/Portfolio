@@ -1,0 +1,222 @@
+/* effects.css
+   Assumes variables.css defines --shadow-sm / --shadow-md and
+   `color-scheme: light dark` on :root (see shadow-tokens.css).
+   Fallbacks in var(..., fallback) keep this working if your token names differ. */
+
+/* ---------- 2. HERO: gradient overlay + text-shadow ---------- */
+.hero {
+    position: relative;
+    min-height: 22rem;
+    display: grid;
+    align-items: end;
+    overflow: hidden;
+}
+
+.hero-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Directional fade + radial vignette on top of the image */
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            to top,
+            light-dark(rgb(0 0 0 / 0.55), rgb(0 0 0 / 0.8)) 0%,
+            transparent 65%
+        ),
+        radial-gradient(
+            ellipse at center,
+            transparent 40%,
+            light-dark(rgb(0 0 0 / 0.25), rgb(0 0 0 / 0.5)) 100%
+        );
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 2rem clamp(1rem, 5vw, 3rem);
+    color: #fff;
+}
+
+.hero-content h1 {
+    margin: 0 0 0.5rem;
+    text-shadow:
+        0 1px 2px rgb(0 0 0 / 0.6),
+        0 4px 16px light-dark(rgb(0 0 0 / 0.45), rgb(0 0 0 / 0.8));
+}
+
+.hero-content p {
+    margin: 0;
+    text-shadow: 0 1px 6px rgb(0 0 0 / 0.6);
+}
+
+/* ---------- 3. ELEVATION CARDS ---------- */
+.card-section,
+.icon-section {
+    padding: 2rem clamp(1rem, 5vw, 3rem);
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: var(--color-surface, light-dark(#ffffff, #1f2128));
+    color: var(--color-text, light-dark(#1b1d24, #e8e9ee));
+    box-shadow: var(--shadow-sm);
+    transition:
+        box-shadow 250ms ease,
+        transform 250ms ease;
+}
+
+.card:hover,
+.card:focus-within {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+}
+
+.card-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: filter 300ms ease;
+}
+
+/* Muted by default, full color when the card is active */
+.card:nth-child(3) .card-image {
+    filter: grayscale(1) brightness(0.9);
+}
+
+.card:nth-child(3):hover .card-image,
+.card:nth-child(3):focus-within .card-image {
+    filter: grayscale(0) brightness(1);
+}
+
+/* Subtle gradient surface on the second card */
+.card:nth-child(2) {
+    background: linear-gradient(
+        160deg,
+        var(--color-surface, light-dark(#ffffff, #1f2128)) 0%,
+        light-dark(#eef1f8, #292c37) 100%
+    );
+}
+
+.card-body {
+    padding: 1rem 1.25rem 1.25rem;
+}
+
+.card-body h3 {
+    margin-top: 0;
+}
+
+/* ---------- 4. FROSTED GLASS ---------- */
+.glass-section {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 22rem;
+    padding: 2rem clamp(1rem, 5vw, 3rem);
+    overflow: hidden;
+}
+
+.glass-background {
+    position: absolute;
+    inset: 0;
+}
+
+.glass-bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.glass-panel {
+    position: relative;
+    z-index: 1;
+    max-width: 36rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    color: light-dark(#14161c, #f2f3f7);
+    background: light-dark(rgb(255 255 255 / 0.4), rgb(20 22 30 / 0.45));
+    border: 1px solid light-dark(rgb(255 255 255 / 0.6), rgb(255 255 255 / 0.15));
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    box-shadow: var(--shadow-md);
+}
+
+/* Reduced motion: drop the blur, use a solid, readable surface */
+@media (prefers-reduced-motion: reduce) {
+    .glass-panel {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: light-dark(rgb(255 255 255 / 0.95), rgb(24 26 34 / 0.95));
+    }
+
+    .card,
+    .card-image {
+        transition: none;
+    }
+
+    .card:hover,
+    .card:focus-within {
+        transform: none;
+    }
+}
+
+/* ---------- 5. ICON ROW: drop-shadow() ---------- */
+.icon-row {
+    --icon-invert: invert(0);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    /* drop-shadow() below uses currentColor, so it follows this value */
+    color: light-dark(#3b4cca, #8fa0ff);
+}
+
+/* The SVGs are black strokes loaded via <img>, so flip them in dark mode */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .icon-row {
+        --icon-invert: invert(1);
+    }
+}
+
+.icon-item {
+    width: 3rem;
+    height: 3rem;
+    /* Stacked drop-shadows: tight ones build a thick outline, last one is a soft shadow */
+    filter:
+        var(--icon-invert)
+        drop-shadow(1px 0 0 currentColor)
+        drop-shadow(-1px 0 0 currentColor)
+        drop-shadow(0 1px 0 currentColor)
+        drop-shadow(0 -1px 0 currentColor)
+        drop-shadow(0 4px 6px color-mix(in srgb, currentColor 45%, transparent));
+    transition: transform 200ms ease;
+}
+
+.icon-item:hover {
+    transform: translateY(-3px) scale(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .icon-item {
+        transition: none;
+    }
+
+    .icon-item:hover {
+        transform: none;
+    }
+}
