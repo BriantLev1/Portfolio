@@ -17,6 +17,7 @@ every push to main.
 - [Custom Properties and Nesting](unit-1/custom-properties/index.html)
 - [Layered Components](unit-2/layered-components/index.html)
 - [::part() and ::slotted()](unit-2/part-and-slotted/index.html)
+- [Visual Effects](unit-3/visual-effects/index.html)
 
 ## Dark Mode
 
