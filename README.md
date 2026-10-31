@@ -18,6 +18,8 @@ every push to main.
 - [Layered Components](unit-2/layered-components/index.html)
 - [::part() and ::slotted()](unit-2/part-and-slotted/index.html)
 - [Visual Effects](unit-3/visual-effects/index.html)
+- [Editorial Layout](unit-4/grid-layouts/editorial.html)
+- [Responsive Card Grid](unit-4/grid-layouts/cards.html) (also my `display: contents` choose topic)
 
 ## Dark Mode
 
@@ -75,10 +77,33 @@ Portfolio/
 │   └── theme-preference.js   # Restores and saves the theme choice (loaded in <head>)
 ├── unit-1/                   # Unit 1 assignments
 ├── unit-2/                   # Unit 2 assignments and choose topics
+├── unit-3/                   # Unit 3 choose topics (visual effects)
+├── unit-4/
+│   └── grid-layouts/         # Unit 4 assignments and choose topic
+│       ├── editorial.html    # Editorial layout (grid-template-areas)
+│       ├── editorial.css
+│       ├── cards.html        # Responsive card grid (auto-fit, display: contents)
+│       └── cards.css
 ├── index.html                # Homepage
 ├── package.json              # Build script and dev dependency
 └── README.md
 ```
+
+## Unit 4: Grid Layouts
+
+Both Unit 4 pages load `css/main.css` for the shared tokens and then add their own
+stylesheet.
+
+- **Editorial layout** (`editorial.html`): `.layout` uses `grid-template-areas`. It is a
+  single stacked column on small screens and two columns with a fixed-width sidebar on
+  wider screens. The header nav uses Flexbox because its links are a one-dimensional row.
+- **Responsive card grid** (`cards.html`): `.card-grid` uses
+  `repeat(auto-fit, minmax(min(240px, 100%), 1fr))`, so cards are at least 240px wide, share
+  extra space equally, and never overflow their container.
+- **Choose topic, `display: contents`:** each card's body wrapper `div` is removed from the
+  layout tree so its heading, text, and link become direct items of the card's grid. The
+  `1fr` text row pins the "Read more" link to the bottom of every card. The wrapper is a
+  plain `div` with no role, no ARIA attributes, and no interactivity, so it is safe to flatten.
 
 ## CSS Architecture
 
