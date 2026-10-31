@@ -1,0 +1,99 @@
+/* ==========================================================================
+   cards.css
+   Tokens use fallbacks so the file works standalone; rename to match
+   ../../css/main.css if your token names differ.
+   ========================================================================== */
+
+.articles-page header,
+.articles-page main {
+  max-inline-size: var(--content-max, 72rem);
+  margin-inline: auto;
+  padding-inline: var(--space-md, 1rem);
+}
+
+.articles-page header {
+  padding-block: var(--space-lg, 2rem) var(--space-md, 1rem);
+  color: var(--color-text, #1c1c21);
+}
+
+.articles-page header h1 {
+  margin-block: 0 var(--space-xs, 0.5rem);
+  font-size: var(--font-size-xl, 2.25rem);
+}
+
+.articles-page header p {
+  margin: 0;
+  color: var(--color-text-muted, #5c5c68);
+}
+
+.articles-page main {
+  padding-block: var(--space-md, 1rem) var(--space-xl, 3rem);
+}
+
+/* ---------- Responsive grid ----------
+   auto-fit + minmax(min(240px, 100%), 1fr):
+   - tracks are at least 240px and share leftover space equally (1fr)
+   - min(240px, 100%) caps the minimum at the container width, so the grid
+     can never overflow when the container is narrower than 240px */
+.articles-page .card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: var(--space-lg, 1.5rem);
+}
+
+/* ---------- Card: a single-column grid ----------
+   Rows: placeholder | heading | text | link
+   The text row is 1fr, so it absorbs all spare height and the link in the
+   last row is pinned to the bottom no matter how long the text is. */
+.articles-page .card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 160px auto 1fr auto;
+  overflow: hidden;
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-border, #d9d9e0);
+  border-radius: var(--radius-md, 0.5rem);
+  color: var(--color-text, #1c1c21);
+}
+
+/* Image placeholder: fixed height comes from the first grid row */
+.articles-page .card > div:first-child {
+  background: var(--color-accent-soft, #e3e8fb);
+}
+
+/* display: contents on the body wrapper.
+   The wrapper is a plain <div>: no role, no ARIA, not focusable, not a
+   landmark, so removing its box is safe. Its h2, p and a become direct
+   grid items of .card and land in rows 2-4. The wrapper's own padding
+   would be ignored (no box), so spacing is applied to the children below. */
+.articles-page .card > div:last-child {
+  display: contents;
+}
+
+.articles-page .card h2 {
+  margin-block: var(--space-md, 1rem) var(--space-xs, 0.5rem);
+  margin-inline: var(--space-md, 1rem);
+  font-size: var(--font-size-md, 1.25rem);
+}
+
+.articles-page .card p {
+  margin-block: 0 var(--space-md, 1rem);
+  margin-inline: var(--space-md, 1rem);
+  color: var(--color-text-muted, #44444f);
+  line-height: var(--line-height-body, 1.6);
+}
+
+/* The link keeps its own box, so focus ring and hit area are unaffected */
+.articles-page .card a {
+  justify-self: start;
+  margin-block-end: var(--space-md, 1rem);
+  margin-inline: var(--space-md, 1rem);
+  color: var(--color-link, #2b4acb);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.articles-page .card a:hover,
+.articles-page .card a:focus-visible {
+  text-decoration: underline;
+}
