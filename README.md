@@ -20,6 +20,8 @@ every push to main.
 - [Visual Effects](unit-3/visual-effects/index.html)
 - [Editorial Layout](unit-4/grid-layouts/editorial.html)
 - [Responsive Card Grid](unit-4/grid-layouts/cards.html) (also my `display: contents` choose topic)
+- [Container Queries](unit-4/advanced/container-demo.html)
+- [Sticky Positioning](unit-4/advanced/sticky-demo.html)
 
 ## Dark Mode
 
@@ -79,6 +81,11 @@ Portfolio/
 ├── unit-2/                   # Unit 2 assignments and choose topics
 ├── unit-3/                   # Unit 3 choose topics (visual effects)
 ├── unit-4/
+│   ├── advanced/             # Unit 4 assignments: container queries and sticky positioning
+│   │   ├── container-demo.html  # One card in a narrow and a wide container (@container)
+│   │   ├── container-demo.css
+│   │   ├── sticky-demo.html     # Sticky TOC and headings, plus the overflow fix
+│   │   └── sticky-demo.css
 │   └── grid-layouts/         # Unit 4 assignments and choose topic
 │       ├── editorial.html    # Editorial layout (grid-template-areas)
 │       ├── editorial.css
@@ -89,10 +96,11 @@ Portfolio/
 └── README.md
 ```
 
-## Unit 4: Grid Layouts
+## Unit 4: Grid Layouts and Advanced Techniques
 
-Both Unit 4 pages load `css/main.css` for the shared tokens and then add their own
-stylesheet.
+Both pages in `grid-layouts/` load `css/main.css` for the shared tokens and then add their
+own stylesheet. The two demos in `advanced/` are standalone: each loads only its own
+stylesheet, so they do not use the shared tokens or follow the theme toggle.
 
 - **Editorial layout** (`editorial.html`): `.layout` uses `grid-template-areas`. It is a
   single stacked column on small screens and two columns with a fixed-width sidebar on
@@ -104,6 +112,19 @@ stylesheet.
   layout tree so its heading, text, and link become direct items of the card's grid. The
   `1fr` text row pins the "Read more" link to the bottom of every card. The wrapper is a
   plain `div` with no role, no ARIA attributes, and no interactivity, so it is safe to flatten.
+- **Container queries** (`container-demo.html`): the same card component is placed in a
+  narrow sidebar slot and a wide main slot. The wrapper around each card sets
+  `container-type: inline-size` and `container-name: card-slot`, and `@container` rules
+  style the card inside it. The card is stacked by default, becomes image-left and
+  text-right at 28rem, and gains a larger image, roomier spacing, an extra paragraph, and a
+  button-style link at 48rem. There are no media queries and no JavaScript, so the card
+  responds to the space it is given rather than to the viewport.
+- **Sticky positioning** (`sticky-demo.html`): a table of contents (`top: 1.5rem`) and
+  section headings (`top: 0`) stay pinned while the reader scrolls. The rounded page
+  wrapper originally used `overflow: hidden` to clip a decorative shape, which made it a
+  scroll container and silently stopped sticky from working. Changing it to
+  `overflow: clip` keeps the same clipping without creating a scroll container. The CSS
+  has a comment at the fix explaining the cause and the alternative.
 
 ## CSS Architecture
 
