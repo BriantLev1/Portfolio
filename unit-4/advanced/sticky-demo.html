@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sticky Positioning Demo</title>
+  <link rel="stylesheet" href="sticky-demo.css">
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- .shell is the rounded "card" that wraps everything.
+         It is also the ancestor that used to carry overflow: hidden. -->
+    <div class="shell">
+
+      <header class="hero">
+        <p class="hero__eyebrow">Unit 4 &middot; Advanced CSS</p>
+        <h1 class="hero__title">How <code>position: sticky</code> really works</h1>
+        <p class="hero__lede">
+          Scroll down. The table of contents follows you, and each section heading
+          stays pinned until its section has fully passed.
+        </p>
+      </header>
+
+      <div class="layout">
+
+        <!-- Sticky element #1: table of contents -->
+        <nav class="toc" aria-label="Table of contents">
+          <p class="toc__title">On this page</p>
+          <ol class="toc__list">
+            <li><a href="#what-it-does">What sticky does</a></li>
+            <li><a href="#offset">The offset is required</a></li>
+            <li><a href="#containing-block">The containing block</a></li>
+            <li><a href="#overflow">Overflow breaks it</a></li>
+            <li><a href="#stretch">Grid and flex stretch</a></li>
+            <li><a href="#checklist">Debugging checklist</a></li>
+          </ol>
+        </nav>
+
+        <main class="content">
+
+          <!-- Sticky element #2: each section heading (h2) -->
+          <section id="what-it-does">
+            <h2>What sticky does</h2>
+            <p>
+              A sticky element behaves like a normal, in-flow element until the scroll
+              position pushes it to a threshold you define. From that moment it behaves
+              like a fixed element, holding its place on screen, until it would leave the
+              boundaries of its parent. Then it scrolls away with that parent.
+            </p>
+            <p>
+              Unlike <code>position: fixed</code>, a sticky element still takes up its
+              original space in the layout, so nothing jumps when it starts to stick.
+              That makes it a good fit for headers, sidebars, and table headings.
+            </p>
+            <p>
+              Because it is a hybrid of relative and fixed positioning, it needs a few
+              things to be true at once: an offset, room to move inside its parent, and a
+              clean path up to the scroll container. The following sections cover each one.
+            </p>
+          </section>
+
+          <section id="offset">
+            <h2>The offset is required</h2>
+            <p>
+              Setting <code>position: sticky</code> by itself does nothing visible. The
+              browser needs to know how far from the edge of the scrollport the element
+              should stick, and that comes from <code>top</code>, <code>bottom</code>,
+              <code>left</code>, or <code>right</code>. Without one of them there is no
+              threshold, so the element simply scrolls like any other.
+            </p>
+            <p>
+              A value of <code>top: 0</code> pins the element flush against the top edge.
+              A value such as <code>top: 1.5rem</code> leaves a little breathing room, which
+              is what the table of contents here uses.
+            </p>
+            <p>
+              This failure is silent. There is no console warning and no error, which is why
+              a missing offset is one of the most common reasons sticky seems to be broken.
+            </p>
+          </section>
+
+          <section id="containing-block">
+            <h2>The containing block</h2>
+            <p>
+              A sticky element can only travel inside its parent. The section heading on this
+              page is a child of its <code>&lt;section&gt;</code>, so it sticks while that
+              section is on screen and then leaves with it as the next heading takes over.
+            </p>
+            <p>
+              If you want an element to stay visible for the whole page, it has to live in a
+              parent that is as tall as the whole page. That is why the table of contents sits
+              inside the full-height layout container rather than inside a short wrapper.
+            </p>
+            <p>
+              A parent that is only as tall as the sticky element itself leaves no room to
+              move, so the element appears to do nothing at all.
+            </p>
+          </section>
+
+          <section id="overflow">
+            <h2>Overflow breaks it</h2>
+            <p>
+              Sticky measures its offset against the nearest ancestor that is a scroll
+              container. Any <code>overflow</code> value other than <code>visible</code> or
+              <code>clip</code> turns an element into one, even if it never actually scrolls.
+            </p>
+            <p>
+              Put <code>overflow: hidden</code> on a wrapper and every sticky element inside it
+              starts measuring against that wrapper. The wrapper does not scroll, so the offset
+              is never reached and the element never sticks.
+            </p>
+            <p>
+              People often add <code>overflow: hidden</code> to round off corners or to trim a
+              decorative shape, which is exactly what the wrapper around this page did. Check
+              the comment in <code>sticky-demo.css</code> to see how it was fixed.
+            </p>
+          </section>
+
+          <section id="stretch">
+            <h2>Grid and flex stretch</h2>
+            <p>
+              Grid and flex items stretch to the full height of their row by default. A sticky
+              sidebar that is stretched to the full height of the row has nowhere to travel,
+              because it already fills its parent.
+            </p>
+            <p>
+              The fix is to stop the stretching with <code>align-self: start</code> (or
+              <code>align-items: flex-start</code> on the container). The sidebar then keeps
+              its natural height and slides within the taller row.
+            </p>
+            <p>
+              The table of contents on this page relies on exactly that, which you can confirm
+              by turning the alignment rule off in your browser's dev tools.
+            </p>
+          </section>
+
+          <section id="checklist">
+            <h2>Debugging checklist</h2>
+            <p>
+              When a sticky element will not stick, walk the list in order. First, confirm it
+              has an offset such as <code>top</code>. Second, check that its parent is taller
+              than the element. Third, look at every ancestor between the element and the
+              viewport for an <code>overflow</code> value that is not <code>visible</code>.
+            </p>
+            <p>
+              Fourth, if the element is a grid or flex item, check whether it is being
+              stretched. Fifth, remember that <code>height: 100%</code> on a sticky element can
+              make it exactly as tall as its parent, which again leaves no room to move.
+            </p>
+            <p>
+              Browser dev tools help here: select the sticky element, then walk up the DOM
+              tree and read the computed <code>overflow</code> on each ancestor.
+            </p>
+          </section>
+
+        </main>
+      </div>
+
+      <footer class="shell__footer">
+        <p>End of demo. Scroll back up to watch the sticky elements release in reverse.</p>
+      </footer>
+
+    </div>
+  </div>
+
+</body>
+</html>

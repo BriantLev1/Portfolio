@@ -1,0 +1,256 @@
+/* ==========================================================
+   Sticky Positioning Demo
+   Two sticky elements:
+     1. .toc         a table of contents that follows the reader
+     2. .content h2  section headings that stay pinned while
+                     their own section scrolls past
+   ========================================================== */
+
+:root {
+  --bg: #eef1f6;
+  --surface: #ffffff;
+  --ink: #1b2430;
+  --ink-soft: #526070;
+  --accent: #4f46e5;
+  --accent-soft: #e0e7ff;
+  --border: #d9dfe8;
+  --radius: 1.25rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Keeps anchor jumps from landing underneath the sticky section heading */
+  scroll-padding-top: 4.5rem;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+code {
+  padding: 0.1em 0.35em;
+  font-size: 0.9em;
+  background: rgb(79 70 229 / 0.1);
+  border-radius: 0.25rem;
+}
+
+.page {
+  max-width: 64rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* ==========================================================
+   THE WRAPPER (.shell)
+   Rounded card around the whole page.
+
+   STICKY + OVERFLOW FIX
+   -------------------------------------------------------
+   What went wrong:
+   This rule originally used `overflow: hidden` so the hero's decorative
+   circle (which deliberately hangs past the card edge) and the rounded
+   corners would be clipped. But any overflow value other than `visible`
+   or `clip` makes an element a scroll container. A sticky element sticks
+   relative to its NEAREST scroll container, so the TOC and the section
+   headings started measuring their `top` offsets against .shell, which
+   never scrolls, instead of against the viewport. The result: sticky
+   silently did nothing, with no error anywhere.
+
+   What I changed:
+   `overflow: hidden` -> `overflow: clip`. It clips painted content in the
+   same way (rounded corners and the hero circle look identical), but it
+   does NOT create a scroll container, so .shell is no longer between the
+   sticky elements and the viewport and sticky works again.
+
+   Other option if older browsers matter (`clip` needs Safari 16+): remove
+   overflow from this wrapper entirely, give .hero its own top
+   border-radius, and put `overflow: hidden` on .hero. The hero is a
+   sibling of the sticky elements, not an ancestor, so it cannot break them.
+   ========================================================== */
+
+.shell {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgb(27 36 48 / 0.12);
+  overflow: clip; /* was: overflow: hidden (this broke sticky) */
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  position: relative;
+  padding: 3.5rem 2rem 3rem;
+  color: #fff;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed 60%, #db2777);
+}
+
+/* Decorative circle that hangs past the top-right corner of the card.
+   Without clipping on .shell it would spill outside the rounded edge
+   and even create a horizontal scrollbar on the page. */
+.hero::after {
+  content: "";
+  position: absolute;
+  top: -9rem;
+  right: -7rem;
+  width: 24rem;
+  height: 24rem;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.16);
+  pointer-events: none;
+}
+
+.hero > * {
+  position: relative; /* keep text above the circle */
+  z-index: 1;
+}
+
+.hero__eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.hero__title {
+  margin: 0 0 0.75rem;
+  max-width: 22ch;
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
+  line-height: 1.15;
+}
+
+.hero__title code {
+  color: #fff;
+  background: rgb(255 255 255 / 0.2);
+}
+
+.hero__lede {
+  margin: 0;
+  max-width: 48ch;
+  font-size: 1.1rem;
+  opacity: 0.95;
+}
+
+/* ---------- Layout: sidebar + content ---------- */
+
+.layout {
+  display: flex;
+  flex-wrap: wrap;
+  /* flex-start stops the TOC from stretching to the full height of the row.
+     A stretched sticky item has no spare room to travel, so it would never move. */
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+/* ---------- Sticky element #1: table of contents ---------- */
+
+.toc {
+  position: sticky;
+  top: 1.5rem; /* REQUIRED: without a top/bottom/left/right offset, sticky does nothing */
+  flex: 1 1 12rem;
+  max-width: 15rem;
+  padding: 1rem 1.25rem;
+  background: var(--accent-soft);
+  border-radius: 0.75rem;
+}
+
+.toc__title {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.toc__list {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.95rem;
+}
+
+.toc__list li + li {
+  margin-top: 0.4rem;
+}
+
+.toc__list a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.toc__list a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.toc__list a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 0.15rem;
+}
+
+/* ---------- Content ---------- */
+
+.content {
+  flex: 4 1 24rem;
+  min-width: 0;
+}
+
+.content section + section {
+  margin-top: 2.5rem;
+}
+
+.content p {
+  margin: 0 0 1rem;
+}
+
+/* ---------- Sticky element #2: section headings ---------- */
+
+.content h2 {
+  position: sticky;
+  top: 0; /* REQUIRED offset: pins the heading flush with the top of the viewport */
+  z-index: 1;
+  margin: 0 0 1rem;
+  padding: 0.75rem 0;
+  font-size: 1.35rem;
+  line-height: 1.25;
+  /* Opaque background so body text doesn't show through while it's stuck */
+  background: var(--surface);
+  border-bottom: 2px solid var(--accent-soft);
+}
+
+/* ---------- Footer ---------- */
+
+.shell__footer {
+  padding: 1.5rem 2rem;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  background: #f6f8fb;
+  border-top: 1px solid var(--border);
+}
+
+.shell__footer p {
+  margin: 0;
+}
+
+/* ---------- Small screens ---------- */
+
+/* When the layout wraps, the TOC stacks above the content. Leaving it sticky
+   would pin it over the text, so let it scroll normally there. */
+@media (max-width: 45rem) {
+  .toc {
+    position: static;
+    max-width: none;
+  }
+}

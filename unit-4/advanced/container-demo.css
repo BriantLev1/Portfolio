@@ -1,0 +1,242 @@
+/* ==========================================================
+   Container Queries Demo
+   The card adapts to the width of its wrapper, not the viewport.
+   ========================================================== */
+
+/* ---------- Base / page styles ---------- */
+
+:root {
+  --bg: #f4f1ea;
+  --surface: #ffffff;
+  --ink: #1f2a2e;
+  --ink-soft: #566268;
+  --accent: #c2410c;
+  --accent-dark: #9a330a;
+  --border: #ddd6c8;
+  --radius: 0.75rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+.page-header {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: 2rem 1rem 0;
+}
+
+.page-header h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  line-height: 1.2;
+}
+
+.page-header p {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--ink-soft);
+}
+
+code {
+  padding: 0.1em 0.35em;
+  font-size: 0.9em;
+  background: #e8e2d4;
+  border-radius: 0.25rem;
+}
+
+/* ---------- Page layout (no media queries: flex-wrap does the work) ---------- */
+
+.layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1.5rem;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.slot--sidebar {
+  flex: 1 1 16rem;
+  max-width: 20rem;
+}
+
+.slot--main {
+  flex: 3 1 30rem;
+  min-width: 0; /* lets the slot shrink instead of overflowing */
+}
+
+.slot__label {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ==========================================================
+   CONTAINMENT CONTEXT
+   container-type goes on the WRAPPER. Rules inside @container
+   can only style the wrapper's descendants, which is why the
+   .card sits inside .slot__container rather than being it.
+   ========================================================== */
+
+.slot__container {
+  container-type: inline-size;  /* track the wrapper's width */
+  container-name: card-slot;    /* name it so @container can target it directly */
+}
+
+/* ==========================================================
+   COMPONENT: default state (narrow) = stacked vertically
+   ========================================================== */
+
+.card {
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 3px rgb(31 42 46 / 0.08);
+}
+
+.card__media {
+  aspect-ratio: 16 / 9;
+  background:
+    radial-gradient(circle at 70% 35%, #fde68a 0 12%, transparent 13%),
+    linear-gradient(to top, #1f3a4d 0 28%, transparent 29%),
+    linear-gradient(to bottom, #7c3aed 0%, #f97316 55%, #fbbf24 100%);
+}
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.card__eyebrow {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.card__title {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.25;
+}
+
+.card__text {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+/* Extra detail is hidden until there is room for it */
+.card__extra {
+  display: none;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.card__link {
+  align-self: flex-start;
+  margin-top: 0.25rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-underline-offset: 0.2em;
+}
+
+.card__link:hover {
+  color: var(--accent-dark);
+}
+
+.card__link:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 0.125rem;
+}
+
+/* ==========================================================
+   CONTAINER QUERY 1: medium (28rem and up)
+   Stack becomes side-by-side: image left, text right.
+   ========================================================== */
+
+@container card-slot (min-width: 28rem) {
+  .card {
+    grid-template-columns: 12rem 1fr;
+  }
+
+  .card__media {
+    aspect-ratio: auto; /* image now fills the full card height */
+    min-height: 100%;
+  }
+
+  .card__body {
+    padding: 1.25rem;
+  }
+
+  .card__title {
+    font-size: 1.35rem;
+  }
+}
+
+/* ==========================================================
+   CONTAINER QUERY 2: large (48rem and up)
+   Bigger image, roomier spacing, extra paragraph appears,
+   and the link becomes a button.
+   ========================================================== */
+
+@container card-slot (min-width: 48rem) {
+  .card {
+    grid-template-columns: 20rem 1fr;
+  }
+
+  .card__body {
+    gap: 0.75rem;
+    padding: 2rem;
+  }
+
+  .card__title {
+    font-size: 1.9rem;
+  }
+
+  .card__text {
+    font-size: 1.05rem;
+  }
+
+  .card__extra {
+    display: block;
+  }
+
+  .card__link {
+    margin-top: 0.5rem;
+    padding: 0.6rem 1.1rem;
+    color: #fff;
+    text-decoration: none;
+    background: var(--accent);
+    border-radius: 999px;
+  }
+
+  .card__link:hover {
+    color: #fff;
+    background: var(--accent-dark);
+  }
+}

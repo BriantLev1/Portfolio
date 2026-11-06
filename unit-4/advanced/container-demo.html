@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Container Queries Demo</title>
+  <link rel="stylesheet" href="container-demo.css">
+</head>
+<body>
+
+  <header class="page-header">
+    <h1>One component, two homes</h1>
+    <p>
+      The exact same <code>.card</code> markup appears in a narrow sidebar and a wide
+      main column. It rearranges itself based on the space its container gives it,
+      with no media queries and no JavaScript.
+    </p>
+  </header>
+
+  <div class="layout">
+
+    <!-- Placement 1: narrow, like a sidebar -->
+    <aside class="slot slot--sidebar">
+      <p class="slot__label">Narrow slot (sidebar)</p>
+
+      <!-- Containment context: container-type is set on this wrapper -->
+      <div class="slot__container">
+        <article class="card">
+          <div class="card__media" role="img" aria-label="Abstract sunrise over a mountain ridge"></div>
+          <div class="card__body">
+            <p class="card__eyebrow">Field notes</p>
+            <h2 class="card__title">Sunrise on the Teton ridge</h2>
+            <p class="card__text">
+              A quiet three-hour climb rewarded us with first light across the whole valley.
+            </p>
+            <p class="card__extra">
+              Pack layers, bring more water than you think you need, and start before
+              4:30 a.m. to catch the best of the alpenglow.
+            </p>
+            <a class="card__link" href="#">Read the story</a>
+          </div>
+        </article>
+      </div>
+    </aside>
+
+    <!-- Placement 2: wide, like a main content area -->
+    <main class="slot slot--main">
+      <p class="slot__label">Wide slot (main content)</p>
+
+      <!-- Same wrapper pattern, same container name -->
+      <div class="slot__container">
+        <article class="card">
+          <div class="card__media" role="img" aria-label="Abstract sunrise over a mountain ridge"></div>
+          <div class="card__body">
+            <p class="card__eyebrow">Field notes</p>
+            <h2 class="card__title">Sunrise on the Teton ridge</h2>
+            <p class="card__text">
+              A quiet three-hour climb rewarded us with first light across the whole valley.
+            </p>
+            <p class="card__extra">
+              Pack layers, bring more water than you think you need, and start before
+              4:30 a.m. to catch the best of the alpenglow.
+            </p>
+            <a class="card__link" href="#">Read the story</a>
+          </div>
+        </article>
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>
