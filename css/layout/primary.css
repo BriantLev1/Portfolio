@@ -20,7 +20,8 @@
     padding: var(--space-md) 0;
 
     h1 {
-        font-size: clamp(1.75rem, 4vw + 1rem, 3rem);
+        font-size: var(--font-size-display);
+        line-height: var(--line-height-display);
         color: var(--color-primary);
         margin-bottom: var(--space-sm);
     }
@@ -36,7 +37,8 @@
     margin-bottom: var(--space-lg);
 
     h2 {
-        font-size: 1.25rem;
+        font-size: var(--font-size-heading-md);
+        line-height: var(--line-height-heading-md);
         color: var(--color-text);
         border-bottom: 2px solid var(--color-accent);
         padding-bottom: var(--space-sm);

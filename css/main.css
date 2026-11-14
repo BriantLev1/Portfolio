@@ -18,4 +18,16 @@
 /* Utilities */
 @import url('utilities/utilities.css') layer(utilities);
 
+/* Web font: Space Grotesk (variable, Latin subset), self-hosted in /fonts.
+   One file covers weights 300 to 700. font-display: swap shows the fallback
+   stack right away and swaps the font in when it arrives, so text is never
+   invisible. @font-face rules are not layered, so they sit here, after the imports. */
+@font-face {
+    font-family: "Space Grotesk";
+    src: url('../fonts/space-grotesk-latin-wght-normal.woff2') format('woff2');
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* Unlayered styles (rare, well commented overrides of last resort) go below */
