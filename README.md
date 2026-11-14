@@ -54,6 +54,66 @@ How it works:
 
 To change the brand color, edit the hue in `--seed-accent` in `css/tokens/colors.css`.
 
+## Typography
+
+All type decisions live in one block in `css/tokens/variables.css`, the same way color
+lives in `colors.css`. Components never use raw sizes; they use role tokens.
+
+**Modular scale.** The ratio is 1.25 (major third). Every step is the base size times
+1.25^n, so sizes relate to each other instead of being picked one by one. I chose it
+because it gives clear steps between heading levels without making the biggest sizes too
+large for a card-based portfolio. The base is 16px on a 320px viewport and 18px on a
+1280px viewport.
+
+| Step | Scale position | At 320px | At 1280px | Fluid? |
+| --- | --- | --- | --- | --- |
+| `--font-size-sm` | n-1 | 14px | 14px | No (fixed so small text stays legible) |
+| `--font-size-md` | n0 | 16px | 18px | Yes |
+| `--font-size-lg` | n1 | 20px | 22.5px | Yes |
+| `--font-size-xl` | n2 | 25px | 28.1px | Yes |
+| `--font-size-2xl` | n3 | 31.3px | 35.2px | Yes |
+| `--font-size-3xl` | n4 | 39.1px | 44px | Yes |
+| `--font-size-4xl` | n5 | 48.8px | 54.9px | Yes |
+
+**Fluid sizing.** Each fluid step is `clamp(min, intercept + slope vw, max)`, where
+`slope = (max - min) / (1280 - 320) x 100` and `intercept = min - slope x 320px` (in rem).
+That makes every step land on its exact target size at 320px and 1280px, and scale
+linearly in between. Because the min and max are in `rem`, the text still respects the
+user's browser font size setting.
+
+**Line height.** Each step has a matching `--line-height-*` token: open (1.5 to 1.6) for
+reading sizes, tighter (1.1 to 1.3) for big headings so multi-line headings hold together.
+
+**Semantic roles.** A second layer points roles at scale steps. Components use only these:
+
+| Role | Points at | Used for |
+| --- | --- | --- |
+| `--font-size-caption` | `sm` | Bylines, tags, footer text |
+| `--font-size-body` | `md` | Body text |
+| `--font-size-heading-sm` | `lg` | `h3` and `h4`, card titles |
+| `--font-size-heading-md` | `xl` | `h2` |
+| `--font-size-heading-lg` | `3xl` | `h1` on inner pages |
+| `--font-size-display` | `4xl` | Homepage `h1` |
+
+Each size role has a matching `--line-height-*` role. To change which step a role uses,
+edit one line.
+
+**Web font.** Headings use Space Grotesk, a variable font (weights 300 to 700) in one
+22 KB Latin subset file, self-hosted in `fonts/`. It is declared in `css/main.css` with
+`font-display: swap`: the browser shows the fallback stack immediately and swaps the font
+in when it loads, so text is never invisible. I chose `swap` over `optional` because the
+heading font is part of the site's look and I want it to always show up. Body text uses
+the system font stack, so only one font file is downloaded. `index.html` preloads the font
+file so the swap happens sooner. The font license is in `fonts/OFL-Space-Grotesk.txt`.
+
+```css
+--font-family-heading: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+--font-family-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+```
+
+**Legacy names.** `--font-family-sans`, `--font-family-base`, and `--font-size-base` are
+aliases for the new tokens.
+
 ## Project Structure
 
 ```
@@ -69,10 +129,13 @@ Portfolio/
 │   │   └── primary.css       # Page skeleton: header, card grid, footer
 │   ├── tokens/
 │   │   ├── colors.css        # Seed, color-scheme, and semantic color tokens (light-dark)
-│   │   └── variables.css     # Spacing, typography, radius, transition, icon, and focus tokens
+│   │   └── variables.css     # Type scale and roles, spacing, radius, transition, icon, and focus tokens
 │   ├── utilities/
 │   │   └── utilities.css     # Single-purpose helpers (.visually-hidden, .text-center)
 │   └── main.css              # Entry point: declares layer order and imports every file
+├── fonts/
+│   ├── space-grotesk-latin-wght-normal.woff2  # Self-hosted variable heading font
+│   └── OFL-Space-Grotesk.txt                  # Font license
 ├── dist/
 │   └── styles.css            # Bundled, minified build output (committed on purpose)
 ├── js/
