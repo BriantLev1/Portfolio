@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Variable Font Axes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,MONO@-15..0,300..1000,0..1,0..1&amp;family=Roboto+Flex:opsz,slnt,wdth,wght@8..144,-10..0,25..151,100..1000&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap">
+<link rel="stylesheet" href="variable-font.css">
+
+</head>
+<body>
+<main>
+  <header class="intro">
+    <h1>Variable font axes</h1>
+    <p class="lede">Each slider below drives one axis of a variable font. The CSS under each sample is what the browser is receiving right now.</p>
+    <pre>@font-face {
+  font-family: 'Recursive';
+  src: url('/fonts/recursive-variable.woff2') format('woff2-variations');
+  font-weight: 300 1000;   /* the range this one file can satisfy */
+  font-style: normal;
+  font-display: swap;
+}</pre>
+  </header>
+
+  <section class="axis" id="axis-wght">
+    <div class="axis-head"><h2>Weight</h2><span class="tag">wght · font-weight</span></div>
+    <div class="specimen">
+      <p id="wSample">Stroke thickness, from one file</p>
+      <div id="wLadder" aria-hidden="true">
+        <span style="font-weight:300">300</span><span style="font-weight:340">340</span><span style="font-weight:500">500</span><span style="font-weight:700">700</span><span style="font-weight:820">820</span><span style="font-weight:1000">1000</span>
+      </div>
+    </div>
+    <div class="controls">
+      <label for="wght">Weight</label>
+      <input id="wght" type="range" min="300" max="1000" step="1" value="820">
+      <span class="val" id="wOut">820</span>
+    </div>
+    <div class="controls">
+      <button class="chip" type="button" data-w="340">Caption · 340</button>
+      <button class="chip" type="button" data-w="500">Body · 500</button>
+      <button class="chip" type="button" data-w="820">Heading · 820</button>
+      <button class="chip" type="button" data-w="1000">Max · 1000</button>
+    </div>
+    <pre id="wCode"></pre>
+    <p class="note">Set in Recursive, whose weight axis runs 300 to 1000. Children inherit the value like any other font-weight.</p>
+  </section>
+
+  <section class="axis" id="axis-wdth">
+    <div class="axis-head"><h2>Width</h2><span class="tag">wdth · font-stretch</span></div>
+    <div class="specimen">
+      <div id="wdBox"><span id="wdSample">Tight headline, same size</span></div>
+    </div>
+    <div class="controls">
+      <label for="wdth">Width</label>
+      <input id="wdth" type="range" min="25" max="151" step="1" value="100">
+      <span class="val" id="wdOut">100%</span>
+    </div>
+    <div class="controls">
+      <button class="chip primary" type="button" id="fitBtn">Fit headline to box</button>
+      <button class="chip" type="button" id="wdReset">Reset to 100%</button>
+    </div>
+    <pre id="wdCode"></pre>
+    <p class="note">Set in Roboto Flex, which spans 25% to 151%. Fit finds the widest setting that still keeps the line inside the box, with the font size untouched.</p>
+  </section>
+
+  <section class="axis" id="axis-slnt">
+    <div class="axis-head"><h2>Slant and italic</h2><span class="tag">slnt · ital · font-style</span></div>
+    <div class="specimen">
+      <p id="slSample">Leaning forward</p>
+    </div>
+    <div class="controls">
+      <label for="slnt">Angle</label>
+      <input id="slnt" type="range" min="0" max="10" step="0.5" value="6">
+      <span class="val" id="slOut">6deg</span>
+    </div>
+    <pre id="slCode"></pre>
+    <p class="note">Roboto Flex has a real slnt axis, so the letters tilt smoothly. CSS writes the angle as positive for a forward lean; the axis value is its negative.</p>
+
+    <div class="trio">
+      <div class="cell">
+        <p class="big" style="font-style:normal">affable flame</p>
+        <div class="cap">font-style: normal</div>
+      </div>
+      <div class="cell">
+        <p class="big" style="font-style:italic">affable flame</p>
+        <div class="cap">font-style: italic<br>redrawn glyphs</div>
+      </div>
+      <div class="cell">
+        <p class="big" style="font-style:oblique 10deg">affable flame</p>
+        <div class="cap">font-style: oblique 10deg<br>roman, tilted</div>
+      </div>
+    </div>
+    <p class="note">Source Serif 4 exposes the italic axis but no slant axis. Compare the <em style="font-family:var(--font-serif)">a</em> and <em style="font-family:var(--font-serif)">f</em> in the middle and right samples: italic swaps in different shapes, while oblique only leans the upright ones.</p>
+  </section>
+
+  <section class="axis" id="axis-opsz">
+    <div class="axis-head"><h2>Optical size</h2><span class="tag">opsz · font-optical-sizing</span></div>
+    <div class="duo">
+      <div class="cell">
+        <p class="txt" id="opAuto">Hamburgefonstiv 0123456789 — small text needs open spacing and sturdy strokes.</p>
+        <div class="cap">font-optical-sizing: auto</div>
+      </div>
+      <div class="cell">
+        <p class="txt" id="opNone" style="font-optical-sizing:none">Hamburgefonstiv 0123456789 — small text needs open spacing and sturdy strokes.</p>
+        <div class="cap">font-optical-sizing: none</div>
+      </div>
+    </div>
+    <div class="controls">
+      <label for="opsz">Font size</label>
+      <input id="opsz" type="range" min="8" max="96" step="1" value="14">
+      <span class="val" id="opOut">14px</span>
+    </div>
+    <pre id="opCode"></pre>
+    <p class="note">Both samples share one font size. On the left the browser feeds that size into the opsz axis. On the right the axis stays at the font's default, so the glyph design never adapts. Drag toward 8px and toward 96px to see the two diverge.</p>
+  </section>
+
+  <section class="axis" id="axis-custom">
+    <div class="axis-head"><h2>Custom axes</h2><span class="tag">MONO · CASL · font-variation-settings</span></div>
+    <p>Beyond the registered five, a type designer can add axes of their own, named with four uppercase letters. Recursive has two. MONO slides from a proportional sans to a fixed-width monospace. CASL slides from a linear, neutral tone to a warmer, more casual one.</p>
+    <p>Custom axes have no CSS property of their own, so font-variation-settings is the only way to reach them.</p>
+    <pre>.casual-mono {
+  font-variation-settings: 'MONO' 1, 'CASL' 0.8;
+}</pre>
+    <p>You can also drive registered axes through this property with lowercase tags such as 'wght' and 'slnt'. Prefer the dedicated properties for those, since they inherit, transition and combine with the rest of your CSS in the way you expect. Keep font-variation-settings for the custom axes.</p>
+    <p>The property replaces rather than merges. If a later rule names only one axis, every other axis you set earlier falls back to its default. List all the custom axes you care about in one declaration.</p>
+    <div class="duo">
+      <div class="cell">
+        <p class="big" style="font-variation-settings: 'MONO' 1, 'CASL' 1">Casual jagged type</p>
+        <div class="cap">one declaration:<br>'MONO' 1, 'CASL' 1</div>
+      </div>
+      <div class="cell">
+        <p class="big" style="font-variation-settings: 'MONO' 1">Casual jagged type</p>
+        <div class="cap">a later rule names only 'MONO' 1<br>CASL falls back to 0</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="axis" id="axis-playground">
+    <div class="axis-head"><h2>Exploring the axes</h2><span class="tag">wght · slnt · CASL · MONO</span></div>
+    <p>Four axes of Recursive in one place: weight and slant from the registered set, plus the two custom axes. The string under the sample is the declaration your CSS would contain.</p>
+    <div class="specimen">
+      <p id="pgSample">Typography in motion</p>
+    </div>
+    <div class="pg-controls">
+      <div class="controls">
+        <label for="pgW">wght</label>
+        <input id="pgW" type="range" min="300" max="1000" step="1" value="433">
+        <span class="val" id="pgWOut">433</span>
+      </div>
+      <div class="controls">
+        <label for="pgS">slnt</label>
+        <input id="pgS" type="range" min="-15" max="0" step="1" value="0">
+        <span class="val" id="pgSOut">0</span>
+      </div>
+      <div class="controls">
+        <label for="pgC">CASL</label>
+        <input id="pgC" type="range" min="0" max="1" step="0.05" value="0">
+        <span class="val" id="pgCOut">0</span>
+      </div>
+      <div class="controls">
+        <label for="pgM">MONO</label>
+        <input id="pgM" type="range" min="0" max="1" step="0.05" value="0">
+        <span class="val" id="pgMOut">0</span>
+      </div>
+    </div>
+    <pre id="pgCode"></pre>
+  </section>
+
+  <section class="axis" id="axis-motion">
+    <div class="axis-head"><h2>Animating an axis</h2><span class="tag">transition · @keyframes · @property</span></div>
+    <p>Axis values are numbers, so they can be transitioned and animated like any other. For a registered axis, animate the dedicated property. For a custom axis, animate font-variation-settings and list every axis you are animating in both states.</p>
+    <div class="specimen stack" id="motionBox">
+      <div>
+        <p class="animated-heading" tabindex="0">Hover or focus this heading</p>
+        <div class="cap">font-weight: 400 → 800, transition: font-weight var(--transition-base)</div>
+      </div>
+      <div>
+        <p class="anim-line shift">Proportional to monospace and back</p>
+        <div class="cap">@keyframes shift { to { font-variation-settings: 'MONO' 1 } }</div>
+      </div>
+      <div>
+        <p class="anim-line typed">Neutral to casual through a typed number</p>
+        <div class="cap">@property --casl, used as 'CASL' var(--casl)</div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="chip" type="button" id="pauseBtn" aria-pressed="false">Pause animations</button>
+    </div>
+    <pre>.animated-heading {
+  font-weight: 400;
+  transition: font-weight var(--transition-base);
+}
+.animated-heading:hover { font-weight: 800; }
+
+.shift {
+  font-variation-settings: 'MONO' 0;
+  animation: shift 4s ease-in-out infinite alternate;
+}
+@keyframes shift { to { font-variation-settings: 'MONO' 1; } }
+
+@property --casl { syntax: '&lt;number&gt;'; inherits: true; initial-value: 0; }
+.typed {
+  font-variation-settings: 'CASL' var(--casl), 'MONO' 0;
+  animation: warm 3s ease-in-out infinite alternate;
+}
+@keyframes warm { to { --casl: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .shift, .typed { animation: none; }
+}</pre>
+    <p class="note">Each frame can force the browser to rasterize the glyphs again, which costs more than animating transform or opacity. Keep axis animation short and purposeful, and switch it off for visitors who ask for reduced motion. This page does exactly that.</p>
+  </section>
+
+  <section class="axis" id="axis-bytes">
+    <div class="axis-head"><h2>One variable file versus a static bundle</h2><span class="tag">file size tradeoff</span></div>
+    <p>A variable file carries interpolation data for its whole range, so it is larger than any single static weight. Whether it saves bytes depends on how many weights and styles the design really uses. Set that number below.</p>
+    <div class="controls">
+      <label for="wts">Static weights</label>
+      <input id="wts" type="range" min="1" max="9" step="1" value="2">
+      <span class="val" id="wtsOut">2 weights</span>
+    </div>
+    <div class="specimen">
+      <div class="bars">
+        <div class="bar-row">
+          <span class="bar-name">One variable file</span>
+          <div class="bar-track"><div class="bar-fill var" id="vrFill"></div></div>
+          <span class="bar-num" id="vrNum">112kb</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name">Static weight bundle</span>
+          <div class="bar-track"><div class="bar-fill" id="stFill"></div></div>
+          <span class="bar-num" id="stNum">48kb</span>
+        </div>
+      </div>
+    </div>
+    <p class="verdict" id="cmpVerdict"></p>
+    <p>Variable fonts win past a threshold, not every time. If the design only ever uses a regular and a bold, two static files are lighter than one variable file. Once the design reaches for several weights, or wants fluid weight as part of its type scale, the variable file pulls ahead and gives the whole range in between at no extra cost. Decide by how many cuts the design needs, not by assuming newer means lighter.</p>
+    <p class="note">The static bundle is scaled from a 48kb size at two weights, which works out to 24kb per weight. Real files vary by font and subset.</p>
+  </section>
+</main>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  function wire(id, fn) {
+    var el = $(id);
+    var run = function () { fn(el.value, el); };
+    el.addEventListener('input', run);
+    run();
+    return el;
+  }
+
+  /* Weight */
+  var wRange = wire('wght', function (v) {
+    $('wSample').style.fontWeight = v;
+    $('wOut').textContent = v;
+    $('wCode').textContent = "font-family: 'Recursive';\nfont-weight: " + v + ";";
+  });
+  document.querySelectorAll('[data-w]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      wRange.value = b.getAttribute('data-w');
+      wRange.dispatchEvent(new Event('input'));
+    });
+  });
+
+  /* Width */
+  var wdRange = wire('wdth', function (v) {
+    $('wdSample').style.fontStretch = v + '%';
+    $('wdOut').textContent = v + '%';
+    $('wdCode').textContent = "font-family: 'Roboto Flex';\nfont-size: 40px;\nfont-stretch: " + v + "%;";
+  });
+  $('fitBtn').addEventListener('click', function () {
+    var box = $('wdBox'), span = $('wdSample');
+    var lo = 25, hi = 151, best = 25;
+    for (var i = 0; i < 14; i++) {
+      var mid = (lo + hi) / 2;
+      span.style.fontStretch = mid + '%';
+      if (span.getBoundingClientRect().width <= box.clientWidth) { best = mid; lo = mid; } else { hi = mid; }
+    }
+    wdRange.value = Math.floor(best);
+    wdRange.dispatchEvent(new Event('input'));
+  });
+  $('wdReset').addEventListener('click', function () {
+    wdRange.value = 100;
+    wdRange.dispatchEvent(new Event('input'));
+  });
+
+  /* Slant */
+  wire('slnt', function (v) {
+    $('slSample').style.fontStyle = 'oblique ' + v + 'deg';
+    $('slOut').textContent = v + 'deg';
+    $('slCode').textContent = "font-style: oblique " + v + "deg;\n/* axis value: slnt = -" + v + " */";
+  });
+
+  /* Optical size */
+  wire('opsz', function (v) {
+    $('opAuto').style.fontSize = v + 'px';
+    $('opNone').style.fontSize = v + 'px';
+    $('opOut').textContent = v + 'px';
+    $('opCode').textContent = "font-size: " + v + "px;\nfont-optical-sizing: auto;  /* opsz follows size: " + v + " */";
+  });
+  /* Playground: weight, slant and the two custom axes */
+  function updatePlayground() {
+    var w = $('pgW').value, s = $('pgS').value, c = $('pgC').value, m = $('pgM').value;
+    var str = "'wght' " + w + ", 'slnt' " + s + ", 'CASL' " + c + ", 'MONO' " + m;
+    $('pgSample').style.fontVariationSettings = str;
+    $('pgWOut').textContent = w;
+    $('pgSOut').textContent = s;
+    $('pgCOut').textContent = c;
+    $('pgMOut').textContent = m;
+    $('pgCode').textContent = "font-variation-settings: " + str + ";";
+  }
+  ['pgW', 'pgS', 'pgC', 'pgM'].forEach(function (id) {
+    $(id).addEventListener('input', updatePlayground);
+  });
+  updatePlayground();
+
+  /* Animation pause */
+  $('pauseBtn').addEventListener('click', function () {
+    var box = $('motionBox');
+    var paused = box.classList.toggle('paused');
+    this.setAttribute('aria-pressed', paused ? 'true' : 'false');
+    this.textContent = paused ? 'Resume animations' : 'Pause animations';
+  });
+
+  /* Variable file versus static bundle */
+  var VARIABLE_KB = 112, STATIC_KB_EACH = 24, SCALE_KB = STATIC_KB_EACH * 9;
+  wire('wts', function (v) {
+    var n = parseInt(v, 10);
+    var st = n * STATIC_KB_EACH;
+    $('wtsOut').textContent = n + (n === 1 ? ' weight' : ' weights');
+    $('vrFill').style.width = (VARIABLE_KB / SCALE_KB * 100) + '%';
+    $('stFill').style.width = (st / SCALE_KB * 100) + '%';
+    $('vrNum').textContent = VARIABLE_KB + 'kb';
+    $('stNum').textContent = st + 'kb';
+    var label = n + (n === 1 ? ' weight' : ' weights');
+    $('cmpVerdict').textContent = st < VARIABLE_KB
+      ? 'At ' + label + ', the static bundle is ' + (VARIABLE_KB - st) + 'kb smaller. A variable font is not worth its overhead here.'
+      : 'At ' + label + ', the variable file is ' + (st - VARIABLE_KB) + 'kb smaller, and it keeps every weight in between.';
+  });
+})();
+</script>
+</body>
+</html>
