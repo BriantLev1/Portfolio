@@ -8,57 +8,58 @@
 
 /* Navigation */
 .site-nav {
-    padding: var(--space-sm) 0;
-    margin-bottom: var(--space-lg);
+    padding: var(--spacing-sm) 0;
+    margin-bottom: var(--spacing-lg);
     font-weight: 600;
 }
 
 /* Page header */
 .board-header {
     text-align: center;
-    margin-bottom: var(--space-lg);
-    padding: var(--space-md) 0;
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md) 0;
 
     h1 {
         font-size: var(--font-size-display);
         line-height: var(--line-height-display);
-        color: var(--color-primary);
-        margin-bottom: var(--space-sm);
+        color: var(--color-accent);
+        margin-bottom: var(--spacing-sm);
     }
 
     p {
         color: var(--color-text-muted);
-        margin-top: var(--space-sm);
+        margin-top: var(--spacing-sm);
     }
 }
 
-/* A section of cards (This Week, Coming Up, Announcements) */
+/* A section of cards (Assignments, Choose Topics) */
 .card-group {
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--spacing-lg);
 
     h2 {
         font-size: var(--font-size-heading-md);
         line-height: var(--line-height-heading-md);
         color: var(--color-text);
         border-bottom: 2px solid var(--color-accent);
-        padding-bottom: var(--space-sm);
-        margin-bottom: var(--space-md);
+        padding-bottom: var(--spacing-sm);
+        margin-bottom: var(--spacing-md);
         display: inline-block;
     }
 }
 
-/* Responsive grid that holds the cards */
+/* Responsive grid that holds the cards.
+   min(240px, 100%) keeps the grid from overflowing on very narrow screens. */
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: calc(var(--space-sm) * 2);
+    grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+    gap: calc(var(--spacing-sm) * 2);
 }
 
 /* Page footer */
 .board-footer {
     text-align: center;
-    padding: var(--space-lg) 0;
+    padding: var(--spacing-lg) 0;
     color: var(--color-text-muted);
-    border-top: 1px solid #e2e4ea;
-    margin-top: var(--space-lg);
+    border-top: 1px solid var(--color-border);
+    margin-top: var(--spacing-lg);
 }

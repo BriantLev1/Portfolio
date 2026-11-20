@@ -5,11 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Briant Woolley - Portfolio</title>
     <link rel="preload" href="fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="css/main.css">
     <script src="js/theme-preference.js"></script>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <header class="board-header">
+        <details class="theme-menu">
+            <summary class="theme-control">
+                <span class="visually-hidden">Color scheme</span>
+            </summary>
+            <div class="theme-extra" role="group" aria-label="Choose color scheme">
+                <label class="theme-control theme-pick" data-theme-pick="light">
+                    <input name="theme-preference" type="radio" value="light">
+                    <span aria-hidden="true">&#9788;&#65039;</span>
+                    <span class="visually-hidden">Light</span>
+                </label>
+                <label class="theme-control theme-pick" data-theme-pick="system">
+                    <input name="theme-preference" type="radio" value="system" checked>
+                    <span aria-hidden="true">&#9881;&#65039;</span>
+                    <span class="visually-hidden">System default</span>
+                </label>
+                <label class="theme-control theme-pick" data-theme-pick="dark">
+                    <input name="theme-preference" type="radio" value="dark">
+                    <span aria-hidden="true">&#127766;</span>
+                    <span class="visually-hidden">Dark</span>
+                </label>
+            </div>
+        </details>
         <h1>Briant Woolley</h1>
         <p>WDD 331R Advanced CSS</p>
         <p>
@@ -19,29 +41,6 @@
             and to gain experience as a Software Developer.
         </p>
     </header>
-
-    <details class="theme-menu">
-        <summary class="theme-control">
-            <span class="visually-hidden">Color scheme</span>
-        </summary>
-        <div class="theme-extra" role="group" aria-label="Choose color scheme">
-            <label class="theme-control theme-pick" data-theme-pick="light">
-                <input name="theme-preference" type="radio" value="light">
-                <span aria-hidden="true">&#9788;&#65039;</span>
-                <span class="visually-hidden">Light</span>
-            </label>
-            <label class="theme-control theme-pick" data-theme-pick="system">
-                <input name="theme-preference" type="radio" value="system" checked>
-                <span aria-hidden="true">&#9881;&#65039;</span>
-                <span class="visually-hidden">System default</span>
-            </label>
-            <label class="theme-control theme-pick" data-theme-pick="dark">
-                <input name="theme-preference" type="radio" value="dark">
-                <span aria-hidden="true">&#127766;</span>
-                <span class="visually-hidden">Dark</span>
-            </label>
-        </div>
-    </details>
 
     <main>
         <section class="card-group">
@@ -73,7 +72,7 @@
                     <p>A long-form article page laid out with grid-template-areas that stacks on small screens and adds a fixed-width sidebar on wider ones.</p>
                     <div class="card-meta">
                         <span>Assignment</span>
-                        <a href="unit-4/grid-layout/editorial.html">View<span class="visually-hidden"> Editorial Layout</span></a>
+                        <a href="unit-4/grid-layouts/editorial.html">View<span class="visually-hidden"> Editorial Layout</span></a>
                     </div>
                 </article>
 
@@ -83,7 +82,7 @@
                     <p>A card grid built with auto-fit and minmax(min()) that never overflows, with read-more links pinned to the bottom of each card.</p>
                     <div class="card-meta">
                         <span>Assignment</span>
-                        <a href="unit-4/grid-layout/cards.html">View<span class="visually-hidden"> Responsive Card Grid</span></a>
+                        <a href="unit-4/grid-layouts/cards.html">View<span class="visually-hidden"> Responsive Card Grid</span></a>
                     </div>
                 </article>
 
@@ -118,17 +117,17 @@
                     <p>A Web Component demo showing how to style Shadow DOM content with ::part() and ::slotted().</p>
                     <div class="card-meta">
                         <span>Choose topic</span>
-                        <a href="unit-2/part-and-slotted/index.html">Unit 2: ::part() and ::slotted()</a>
+                        <a href="unit-2/part-and-slotted/index.html">View<span class="visually-hidden"> ::part() and ::slotted()</span></a>
                     </div>
                 </article>
 
                 <article class="card">
                     <span class="card-tag">Unit 3</span>
                     <h3>Visual effects</h3>
-                    <p>Visual effects for the web page</p>
+                    <p>Layered shadows, gradient overlays, image filters, and a frosted glass panel that work in light and dark mode.</p>
                     <div class="card-meta">
                         <span>Choose topic</span>
-                        <a href="unit-3/visual-effects/index.html">Unit 3: Visual effects</a>
+                        <a href="unit-3/visual-effects/index.html">View<span class="visually-hidden"> Visual effects</span></a>
                     </div>
                 </article>
 
@@ -138,17 +137,17 @@
                     <p>Flattening a plain card wrapper out of the layout tree so its children join the card's grid, with the accessibility tradeoffs considered.</p>
                     <div class="card-meta">
                         <span>Choose topic</span>
-                        <a href="unit-4/grid-layouts/cards.html">Unit 4: display: contents</a>
+                        <a href="unit-4/grid-layouts/cards.html">View<span class="visually-hidden"> display: contents</span></a>
                     </div>
                 </article>
 
                 <article class="card">
-                    <span class="card-tag">Unit 4</span>
+                    <span class="card-tag">Unit 5</span>
                     <h3>Variable Font Axis</h3>
                     <p>Demonstrating how to use variable font axes in CSS for dynamic typography.</p>
                     <div class="card-meta">
                         <span>Choose topic</span>
-                        <a href="choose-topics/variable-font-axes/variable-font.html">Unit 5: Variable Font Axis</a>
+                        <a href="choose-topics/variable-font-axes/variable-font.html">View<span class="visually-hidden"> Variable Font Axis</span></a>
                     </div>
                 </article>
             </div>

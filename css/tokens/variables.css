@@ -89,8 +89,9 @@
     --outline-width: 2px;
 
     /* Shadows (layered elevation stacks) */
-    /* light-dark() needs color-scheme; harmless to repeat if colors.css sets it too */
-    color-scheme: light dark;
+    /* color-scheme is NOT set here: colors.css owns it. Setting "light dark" here
+       overrode colors.css (same specificity, later import) and made the "Light"
+       toggle choice follow the OS dark setting. */
 
     /* Soft dark in light mode, deeper black in dark mode */
     --shadow-color: light-dark(rgb(20 24 40 / 0.14), rgb(0 0 0 / 0.55));
@@ -106,6 +107,10 @@
         0 8px 16px var(--shadow-color),
         0 16px 32px var(--shadow-color);
 
-    /* Legacy name for backwards compatibility */
+    /* Legacy names for backwards compatibility (older pages still use --space-*) */
+    --space-xs: var(--spacing-xs);
+    --space-sm: var(--spacing-sm);
     --space-md: var(--spacing-md);
+    --space-lg: var(--spacing-lg);
+    --space-xl: var(--spacing-xl);
 }

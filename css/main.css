@@ -11,9 +11,18 @@
 
 /* Layout */
 @import url('layout/primary.css') layer(layout);
- 
-/* Components (folder is empty for now; add imports here as files are created) */
+
+/* Components
+   Add an @import line here each time a new file is created in components/. */
 @import url('components/theme-toggle.css') layer(components);
+
+/* TODO (uncomment once the file exists, otherwise the build fails on a missing file):
+   Note: effects.css styles .card, .cards, and .card:nth-child(n) site-wide, so scope its
+   selectors under a page class (for example .effects-page) before importing it here,
+   or it will restyle the homepage cards. */
+@import url('components/card.css') layer(components);
+@import url('components/effects.css') layer(components);
+
 
 /* Utilities */
 @import url('utilities/utilities.css') layer(utilities);

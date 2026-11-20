@@ -10,7 +10,7 @@ body {
     font-size: var(--font-size-body);
     line-height: var(--line-height-body);
     color: var(--color-text);
-    background: var(--color-background);
+    background: var(--color-bg);
     padding: clamp(1rem, 2vw + 0.5rem, 3rem);
 }
 
@@ -44,11 +44,11 @@ small {
 }
 
 a {
-    color: var(--color-primary);
+    color: var(--color-link);
     text-decoration: none;
 
     &:hover {
-        color: var(--color-accent);
+        color: var(--color-link-hover);
         text-decoration: underline;
     }
 }
