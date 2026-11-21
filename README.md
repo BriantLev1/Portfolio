@@ -1,246 +1,181 @@
-# WDD 331R Portfolio
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briant Woolley - Portfolio</title>
+    <link rel="preload" href="fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <script src="js/theme-preference.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <header class="board-header">
+        <details class="theme-menu">
+            <summary class="theme-control">
+                <span class="visually-hidden">Color scheme</span>
+            </summary>
+            <div class="theme-extra" role="group" aria-label="Choose color scheme">
+                <label class="theme-control theme-pick" data-theme-pick="light">
+                    <input name="theme-preference" type="radio" value="light">
+                    <span aria-hidden="true">&#9788;&#65039;</span>
+                    <span class="visually-hidden">Light</span>
+                </label>
+                <label class="theme-control theme-pick" data-theme-pick="system">
+                    <input name="theme-preference" type="radio" value="system" checked>
+                    <span aria-hidden="true">&#9881;&#65039;</span>
+                    <span class="visually-hidden">System default</span>
+                </label>
+                <label class="theme-control theme-pick" data-theme-pick="dark">
+                    <input name="theme-preference" type="radio" value="dark">
+                    <span aria-hidden="true">&#127766;</span>
+                    <span class="visually-hidden">Dark</span>
+                </label>
+            </div>
+        </details>
+        <h1>Briant Woolley</h1>
+        <p>WDD 331R Advanced CSS</p>
+        <p>
+            Hello, I am from a small town in Arizona called Seligman. I am currently a student at
+            BYU-Idaho studying Software Engineering. The purpose of this website is to present my
+            projects and skills to potential employers. I have a big drive to learn as much as I can
+            and to gain experience as a Software Developer.
+        </p>
+    </header>
 
-**Student:** Briant Woolley
-**Semester:** Fall semester of 2026
-**Live Site:** [View Site](https://briantlev1.github.io/Portfolio/)
+    <main>
+        <section class="card-group">
+            <h2>Assignments</h2>
+            <div class="cards">
+                <article class="card">
+                    <span class="card-tag">Unit 1</span>
+                    <h3>Custom Properties and Nesting</h3>
+                    <p>Design tokens built with CSS custom properties and organized with native nesting.</p>
+                    <div class="card-meta">
+                        <span>Assignment</span>
+                        <a href="unit-1/custom-properties/index.html">View<span class="visually-hidden"> Custom Properties and Nesting</span></a>
+                    </div>
+                </article>
 
-## About
+                <article class="card">
+                    <span class="card-tag">Unit 2</span>
+                    <h3>Layered Components</h3>
+                    <p>Components organized with cascade layers so the order of styles stays predictable.</p>
+                    <div class="card-meta">
+                        <span>Assignment</span>
+                        <a href="unit-2/layered-components/index.html">View<span class="visually-hidden"> Layered Components</span></a>
+                    </div>
+                </article>
 
-This repository is my portfolio for WDD 331R: Advanced CSS.
-Each week I add new pages and styles as I work through the course
-assignments. The site deploys automatically to GitHub Pages on
-every push to main.
+                <article class="card">
+                    <span class="card-tag">Unit 4</span>
+                    <h3>Editorial Layout</h3>
+                    <p>A long-form article page laid out with grid-template-areas that stacks on small screens and adds a fixed-width sidebar on wider ones.</p>
+                    <div class="card-meta">
+                        <span>Assignment</span>
+                        <a href="unit-4/grid-layouts/editorial.html">View<span class="visually-hidden"> Editorial Layout</span></a>
+                    </div>
+                </article>
 
-## Pages
+                <article class="card">
+                    <span class="card-tag">Unit 4</span>
+                    <h3>Responsive Card Grid</h3>
+                    <p>A card grid built with auto-fit and minmax(min()) that never overflows, with read-more links pinned to the bottom of each card.</p>
+                    <div class="card-meta">
+                        <span>Assignment</span>
+                        <a href="unit-4/grid-layouts/cards.html">View<span class="visually-hidden"> Responsive Card Grid</span></a>
+                    </div>
+                </article>
 
-- [Home](index.html)
-- [Custom Properties and Nesting](unit-1/custom-properties/index.html)
-- [Layered Components](unit-2/layered-components/index.html)
-- [::part() and ::slotted()](unit-2/part-and-slotted/index.html)
-- [Visual Effects](unit-3/visual-effects/index.html)
-- [Editorial Layout](unit-4/grid-layouts/editorial.html)
-- [Responsive Card Grid](unit-4/grid-layouts/cards.html) (also my `display: contents` choose topic)
-- [Container Queries](unit-4/advanced/container-demo.html)
-- [Sticky Positioning](unit-4/advanced/sticky-demo.html)
+                <article class="card">
+                    <span class="card-tag">Unit 4</span>
+                    <h3>Container Queries</h3>
+                    <p>One card component placed in a narrow sidebar and a wide main area, rearranging itself with named @container rules and no media queries or JavaScript.</p>
+                    <div class="card-meta">
+                        <span>Assignment</span>
+                        <a href="unit-4/advanced/container-demo.html">View<span class="visually-hidden"> Container Queries</span></a>
+                    </div>
+                </article>
 
-## Dark Mode
+                <article class="card">
+                    <span class="card-tag">Unit 4</span>
+                    <h3>Sticky Positioning</h3>
+                    <p>A sticky table of contents and section headings, including the overflow: hidden bug that silently breaks sticky and the overflow: clip fix.</p>
+                    <div class="card-meta">
+                        <span>Assignment</span>
+                        <a href="unit-4/advanced/sticky-demo.html">View<span class="visually-hidden"> Sticky Positioning</span></a>
+                    </div>
+                </article>
 
-The site supports **light mode, dark mode, and a system default** option. A gear/sun/moon
-toggle in the header opens a small menu where you pick a theme. The choice is saved in
-`localStorage` under the key `theme-preference`, so it persists between visits. With no
-saved choice, the site follows your operating system's light or dark setting.
+                <article class="card">
+                    <span class="card-tag">Print</span>
+                    <h3>Resume and Print Stylesheet</h3>
+                    <p>A resume styled with the site tokens on screen and a separate @media print block that prints cleanly to PDF.</p>
+                    <div class="card-meta">
+                        <span>Assignment</span>
+                        <a href="unit-5/resume/resume.html">View<span class="visually-hidden"> Resume and Print Stylesheet</span></a>
+                    </div>
+                </article>
 
-How it works:
+                <article class="card">
+                    <span class="card-tag">Forms</span>
+                    <h3>Contact Form</h3>
+                    <p>An accessible contact form with labeled fields, a brand-colored checkbox, and a textarea that grows with field-sizing.</p>
+                    <div class="card-meta">
+                        <span>Assignment</span>
+                        <a href="unit-5/contact/contact.html">View<span class="visually-hidden"> Contact Form</span></a>
+                    </div>
+                </article>
+            </div>
+        </section>
 
-- **Color tokens** live in `css/tokens/colors.css`, in three parts:
-  1. **Seeds** (`--seed-*`): the raw, human-chosen colors. The accent seed is an `oklch()`
-     color, and the accent ramp (`--accent-200` through `--accent-800`) is generated from it
-     with `color-mix(in oklch, ...)`.
-  2. **Color-scheme switching rules**: `:has()` selectors that watch the checked
-     `theme-preference` radio button and set `color-scheme: dark` when needed.
-  3. **Semantic tokens** (`--color-*`): defined with `light-dark()`, so each token holds
-     both its light and dark value. These are the only color tokens that pages and
-     components should use (for example `var(--color-bg)` and `var(--color-text)`).
-- **The toggle** is a `<details>` menu with three radio inputs (light, system, dark),
-  styled in `css/components/theme-toggle.css`.
-- **Persistence** is handled by `js/theme-preference.js`, which restores the saved choice
-  before first paint (no flash of the wrong theme) and saves any new choice. It is loaded
-  in the `<head>` without `defer` or `async`, before the stylesheet:
+        <section class="card-group">
+            <h2>Choose Topics</h2>
+            <div class="cards">
+                <article class="card">
+                    <span class="card-tag">Unit 2</span>
+                    <h3>::part() and ::slotted()</h3>
+                    <p>A Web Component demo showing how to style Shadow DOM content with ::part() and ::slotted().</p>
+                    <div class="card-meta">
+                        <span>Choose topic</span>
+                        <a href="unit-2/part-and-slotted/index.html">View<span class="visually-hidden"> ::part() and ::slotted()</span></a>
+                    </div>
+                </article>
 
-```html
-<script src="js/theme-preference.js"></script>
-<link rel="stylesheet" href="css/main.css">
-```
+                <article class="card">
+                    <span class="card-tag">Unit 3</span>
+                    <h3>Visual effects</h3>
+                    <p>Layered shadows, gradient overlays, image filters, and a frosted glass panel that work in light and dark mode.</p>
+                    <div class="card-meta">
+                        <span>Choose topic</span>
+                        <a href="unit-3/visual-effects/index.html">View<span class="visually-hidden"> Visual effects</span></a>
+                    </div>
+                </article>
 
-To change the brand color, edit the hue in `--seed-accent` in `css/tokens/colors.css`.
+                <article class="card">
+                    <span class="card-tag">Unit 4</span>
+                    <h3>display: contents</h3>
+                    <p>Flattening a plain card wrapper out of the layout tree so its children join the card's grid, with the accessibility tradeoffs considered.</p>
+                    <div class="card-meta">
+                        <span>Choose topic</span>
+                        <a href="unit-4/grid-layouts/cards.html">View<span class="visually-hidden"> display: contents</span></a>
+                    </div>
+                </article>
 
-## Typography
+                <article class="card">
+                    <span class="card-tag">Unit 5</span>
+                    <h3>Variable Font Axis</h3>
+                    <p>Demonstrating how to use variable font axes in CSS for dynamic typography.</p>
+                    <div class="card-meta">
+                        <span>Choose topic</span>
+                        <a href="choose-topics/variable-font-axes/variable-font.html">View<span class="visually-hidden"> Variable Font Axis</span></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
 
-All type decisions live in one block in `css/tokens/variables.css`, the same way color
-lives in `colors.css`. Components never use raw sizes; they use role tokens.
-
-**Modular scale.** The ratio is 1.25 (major third). Every step is the base size times
-1.25^n, so sizes relate to each other instead of being picked one by one. I chose it
-because it gives clear steps between heading levels without making the biggest sizes too
-large for a card-based portfolio. The base is 16px on a 320px viewport and 18px on a
-1280px viewport.
-
-| Step | Scale position | At 320px | At 1280px | Fluid? |
-| --- | --- | --- | --- | --- |
-| `--font-size-sm` | n-1 | 14px | 14px | No (fixed so small text stays legible) |
-| `--font-size-md` | n0 | 16px | 18px | Yes |
-| `--font-size-lg` | n1 | 20px | 22.5px | Yes |
-| `--font-size-xl` | n2 | 25px | 28.1px | Yes |
-| `--font-size-2xl` | n3 | 31.3px | 35.2px | Yes |
-| `--font-size-3xl` | n4 | 39.1px | 44px | Yes |
-| `--font-size-4xl` | n5 | 48.8px | 54.9px | Yes |
-
-**Fluid sizing.** Each fluid step is `clamp(min, intercept + slope vw, max)`, where
-`slope = (max - min) / (1280 - 320) x 100` and `intercept = min - slope x 320px` (in rem).
-That makes every step land on its exact target size at 320px and 1280px, and scale
-linearly in between. Because the min and max are in `rem`, the text still respects the
-user's browser font size setting.
-
-**Line height.** Each step has a matching `--line-height-*` token: open (1.5 to 1.6) for
-reading sizes, tighter (1.1 to 1.3) for big headings so multi-line headings hold together.
-
-**Semantic roles.** A second layer points roles at scale steps. Components use only these:
-
-| Role | Points at | Used for |
-| --- | --- | --- |
-| `--font-size-caption` | `sm` | Bylines, tags, footer text |
-| `--font-size-body` | `md` | Body text |
-| `--font-size-heading-sm` | `lg` | `h3` and `h4`, card titles |
-| `--font-size-heading-md` | `xl` | `h2` |
-| `--font-size-heading-lg` | `3xl` | `h1` on inner pages |
-| `--font-size-display` | `4xl` | Homepage `h1` |
-
-Each size role has a matching `--line-height-*` role. To change which step a role uses,
-edit one line.
-
-**Web font.** Headings use Space Grotesk, a variable font (weights 300 to 700) in one
-22 KB Latin subset file, self-hosted in `fonts/`. It is declared in `css/main.css` with
-`font-display: swap`: the browser shows the fallback stack immediately and swaps the font
-in when it loads, so text is never invisible. I chose `swap` over `optional` because the
-heading font is part of the site's look and I want it to always show up. Body text uses
-the system font stack, so only one font file is downloaded. `index.html` preloads the font
-file so the swap happens sooner. The font license is in `fonts/OFL-Space-Grotesk.txt`.
-
-```css
---font-family-heading: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
---font-family-body: system-ui, -apple-system, "Segoe UI", sans-serif;
-```
-
-**Legacy names.** `--font-family-sans`, `--font-family-base`, and `--font-size-base` are
-aliases for the new tokens.
-
-## Project Structure
-
-```
-Portfolio/
-├── css/
-│   ├── base/
-│   │   ├── elements.css      # Bare element styles (body, headings, links)
-│   │   └── reset.css         # Minimal CSS reset
-│   ├── components/
-│   │   ├── card.css          # .card component
-│   │   └── theme-toggle.css  # Light / system / dark theme toggle
-│   ├── layout/
-│   │   └── primary.css       # Page skeleton: header, card grid, footer
-│   ├── tokens/
-│   │   ├── colors.css        # Seed, color-scheme, and semantic color tokens (light-dark)
-│   │   └── variables.css     # Type scale and roles, spacing, radius, transition, icon, and focus tokens
-│   ├── utilities/
-│   │   └── utilities.css     # Single-purpose helpers (.visually-hidden, .text-center)
-│   └── main.css              # Entry point: declares layer order and imports every file
-├── fonts/
-│   ├── space-grotesk-latin-wght-normal.woff2  # Self-hosted variable heading font
-│   └── OFL-Space-Grotesk.txt                  # Font license
-├── dist/
-│   └── styles.css            # Bundled, minified build output (committed on purpose)
-├── js/
-│   └── theme-preference.js   # Restores and saves the theme choice (loaded in <head>)
-├── unit-1/                   # Unit 1 assignments
-├── unit-2/                   # Unit 2 assignments and choose topics
-├── unit-3/                   # Unit 3 choose topics (visual effects)
-├── unit-4/
-│   ├── advanced/             # Unit 4 assignments: container queries and sticky positioning
-│   │   ├── container-demo.html  # One card in a narrow and a wide container (@container)
-│   │   ├── container-demo.css
-│   │   ├── sticky-demo.html     # Sticky TOC and headings, plus the overflow fix
-│   │   └── sticky-demo.css
-│   └── grid-layouts/         # Unit 4 assignments and choose topic
-│       ├── editorial.html    # Editorial layout (grid-template-areas)
-│       ├── editorial.css
-│       ├── cards.html        # Responsive card grid (auto-fit, display: contents)
-│       └── cards.css
-├── index.html                # Homepage
-├── package.json              # Build script and dev dependency
-└── README.md
-```
-
-## Unit 4: Grid Layouts and Advanced Techniques
-
-Both pages in `grid-layouts/` load `css/main.css` for the shared tokens and then add their
-own stylesheet. The two demos in `advanced/` are standalone: each loads only its own
-stylesheet, so they do not use the shared tokens or follow the theme toggle.
-
-- **Editorial layout** (`editorial.html`): `.layout` uses `grid-template-areas`. It is a
-  single stacked column on small screens and two columns with a fixed-width sidebar on
-  wider screens. The header nav uses Flexbox because its links are a one-dimensional row.
-- **Responsive card grid** (`cards.html`): `.card-grid` uses
-  `repeat(auto-fit, minmax(min(240px, 100%), 1fr))`, so cards are at least 240px wide, share
-  extra space equally, and never overflow their container.
-- **Choose topic, `display: contents`:** each card's body wrapper `div` is removed from the
-  layout tree so its heading, text, and link become direct items of the card's grid. The
-  `1fr` text row pins the "Read more" link to the bottom of every card. The wrapper is a
-  plain `div` with no role, no ARIA attributes, and no interactivity, so it is safe to flatten.
-- **Container queries** (`container-demo.html`): the same card component is placed in a
-  narrow sidebar slot and a wide main slot. The wrapper around each card sets
-  `container-type: inline-size` and `container-name: card-slot`, and `@container` rules
-  style the card inside it. The card is stacked by default, becomes image-left and
-  text-right at 28rem, and gains a larger image, roomier spacing, an extra paragraph, and a
-  button-style link at 48rem. There are no media queries and no JavaScript, so the card
-  responds to the space it is given rather than to the viewport.
-- **Sticky positioning** (`sticky-demo.html`): a table of contents (`top: 1.5rem`) and
-  section headings (`top: 0`) stay pinned while the reader scrolls. The rounded page
-  wrapper originally used `overflow: hidden` to clip a decorative shape, which made it a
-  scroll container and silently stopped sticky from working. Changing it to
-  `overflow: clip` keeps the same clipping without creating a scroll container. The CSS
-  has a comment at the fix explaining the cause and the alternative.
-
-## CSS Architecture
-
-The CSS follows a layered, token-first architecture. `css/main.css` is the single
-entry point. It declares the cascade order first, then imports each file into its layer:
-
-```css
-@layer tokens, base, layout, components, utilities;
-```
-
-Later layers beat earlier ones regardless of selector specificity, so utilities can
-override components without `!important`.
-
-| Layer | Folder | What belongs there |
-| --- | --- | --- |
-| `tokens` | `css/tokens/` | Custom properties for every design decision |
-| `base` | `css/base/` | The reset and bare HTML element styles |
-| `layout` | `css/layout/` | Page structure and composition |
-| `components` | `css/components/` | Styled UI pieces such as cards and the theme toggle |
-| `utilities` | `css/utilities/` | Small helper classes |
-
-**Token-first:** colors live in `tokens/colors.css`, and everything else (spacing,
-typography, border radius, transitions, icon sizes, focus outline) lives in
-`tokens/variables.css`. Other files reference tokens with `var()` instead of typing
-raw values. Any older token names are kept as aliases that point at the new names, so
-older declarations keep working while pages are migrated.
-
-**Adding a new file:** create it in the right folder, then add one `@import` line to
-`css/main.css` with the matching `layer()` assignment.
-
-## Build Tool
-
-I chose [Lightning CSS](https://lightningcss.dev/). It bundles the `@import` files
-in `css/main.css` into one file and minifies the result.
-
-### How to run the build
-
-You need [Node.js](https://nodejs.org/) installed.
-
-```
-npm install
-npm run build
-```
-
-The build script in `package.json` is:
-
-```
-lightningcss --minify --bundle css/main.css -o dist/styles.css
-```
-
-It reads `css/main.css` and writes the bundled, minified output to
-`dist/styles.css`. If `dist/` does not exist yet, create it first with `mkdir dist`.
-
-`dist/styles.css` is committed to the repository so the bundler output can be
-reviewed. `node_modules/` is ignored by `.gitignore`. The homepage links to
-`css/main.css` directly, so the layered source files are what the browser loads.
+    <footer class="board-footer">
+        <p>&copy; 2026 Briant Woolley &middot; WDD 331R Advanced CSS</p>
+    </footer>
+</body>
+</html>

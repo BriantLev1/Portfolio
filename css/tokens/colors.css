@@ -1,77 +1,102 @@
 /* ========================================
-   COLOR TOKENS
-   Every color used across the site is
-   defined here and consumed with var().
+   DESIGN TOKENS
+   Spacing, typography, borders, and every
+   other non-color design decision.
+   Colors live in tokens/colors.css.
    ======================================== */
-
-/* ---- Seeds + accent ramp ---- */
 :root {
-    color-scheme: light;
+    /* ----------------------------------------
+       TYPOGRAPHY
+       Layer 1: font families
+       Layer 2: modular scale (ratio 1.25, major third)
+       Layer 3: line heights, paired with each step
+       Layer 4: semantic roles (what components use)
+       ---------------------------------------- */
 
-    /* ---- Seeds ---- */
-    --seed-bg: #f4f6f8;
-    --seed-surface: #ffffff;
-    --seed-text: #1e293b;
-    --seed-text-muted: #64748b;
-    --seed-accent: oklch(0.55 0.2 260);  /* CHANGE THIS: Choose your own hue */
-    --seed-accent-hover: color-mix(in oklch, var(--seed-accent) 80%, black);
-    --seed-link: var(--seed-accent);
-    --seed-link-hover: var(--seed-accent-hover);
-    --seed-border: #e2e8f0;
-    --seed-border-strong: #cbd5e1;
+    /* Font families. Space Grotesk is self-hosted (see @font-face in main.css).
+       The fallback stack keeps text readable before the font arrives. */
+    --font-family-heading: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-family-body: system-ui, -apple-system, "Segoe UI", sans-serif;
 
-    /* ---- Accent ramp ---- */
-    --accent-200: color-mix(in oklch, var(--seed-accent) 30%, white);
-    --accent-300: color-mix(in oklch, var(--seed-accent) 50%, white);
-    --accent-400: color-mix(in oklch, var(--seed-accent) 75%, white);
-    --accent-500: var(--seed-accent);
-    --accent-600: color-mix(in oklch, var(--seed-accent) 80%, black);
-    --accent-700: color-mix(in oklch, var(--seed-accent) 60%, black);
-    --accent-800: color-mix(in oklch, var(--seed-accent) 40%, black);
-}
+    /* Modular scale: ratio 1.25. Each step = base x 1.25^n.
+       Fluid steps run from the 320px viewport (min) to the 1280px viewport (max).
+       Base size: 16px at 320px, 18px at 1280px.
+       clamp(min, intercept + slope vw, max), where
+         slope     = (max - min) / (1280 - 320) x 100   (in vw)
+         intercept = min - slope x 320px                (in rem)
+       Sizes at 320px -> 1280px:
+         sm 14px (fixed) | md 16 -> 18 | lg 20 -> 22.5 | xl 25 -> 28.1
+         2xl 31.3 -> 35.2 | 3xl 39.1 -> 44 | 4xl 48.8 -> 54.9 */
+    --font-size-sm:  0.875rem; /* n-1: fixed on purpose. Small text stays a steady, legible 14px */
+    --font-size-md:  clamp(1rem,      0.9583rem + 0.2083vw, 1.125rem);  /* n0: body */
+    --font-size-lg:  clamp(1.25rem,   1.1979rem + 0.2604vw, 1.4062rem); /* n1 */
+    --font-size-xl:  clamp(1.5625rem, 1.4974rem + 0.3255vw, 1.7578rem); /* n2 */
+    --font-size-2xl: clamp(1.9531rem, 1.8717rem + 0.4069vw, 2.1973rem); /* n3 */
+    --font-size-3xl: clamp(2.4414rem, 2.3397rem + 0.5086vw, 2.7466rem); /* n4 */
+    --font-size-4xl: clamp(3.0518rem, 2.9246rem + 0.6358vw, 3.4332rem); /* n5 */
 
-/* ---- Color-scheme switching ---- */
-/* User chose dark */
-html:has(input[name='theme-preference'][value='dark']:checked) {
-    color-scheme: dark;
-}
+    /* Line height per step: open for reading sizes, tight for large sizes */
+    --line-height-sm:  1.5;
+    --line-height-md:  1.6;
+    --line-height-lg:  1.4;
+    --line-height-xl:  1.3;
+    --line-height-2xl: 1.25;
+    --line-height-3xl: 1.2;
+    --line-height-4xl: 1.1;
 
-/* User chose system and OS is dark */
-@media (prefers-color-scheme: dark) {
-    html:has(input[name='theme-preference'][value='system']:checked) {
-        color-scheme: dark;
-    }
-}
+    /* Semantic roles: components use these, never the numeric steps.
+       Changing which step a role uses is a one-line edit. */
+    --font-size-caption:    var(--font-size-sm);
+    --font-size-body:       var(--font-size-md);
+    --font-size-heading-sm: var(--font-size-lg);
+    --font-size-heading-md: var(--font-size-xl);
+    --font-size-heading-lg: var(--font-size-3xl);
+    --font-size-display:    var(--font-size-4xl);
 
-/* ---- Semantic tokens ---- */
-:root,
-html {
-    --color-bg: light-dark(var(--seed-bg), oklch(0.18 0.02 260));
-    --color-surface: light-dark(var(--seed-surface), oklch(0.22 0.03 260));
-    --color-text: light-dark(var(--seed-text), oklch(0.88 0.02 260));
-    --color-text-muted: light-dark(var(--seed-text-muted), oklch(0.68 0.03 250));
-    --color-accent: light-dark(var(--seed-accent), oklch(0.62 0.15 240));
-    --color-accent-hover: light-dark(var(--seed-accent-hover), oklch(0.68 0.18 240));
-    --color-link: light-dark(var(--seed-link), oklch(0.65 0.16 240));
-    --color-link-hover: light-dark(var(--seed-link-hover), oklch(0.72 0.18 240));
-    --color-border: light-dark(var(--seed-border), oklch(0.32 0.02 260));
-    --color-border-strong: light-dark(var(--seed-border-strong), oklch(0.38 0.02 260));
+    --line-height-caption:    var(--line-height-sm);
+    --line-height-body:       var(--line-height-md);
+    --line-height-heading-sm: var(--line-height-lg);
+    --line-height-heading-md: var(--line-height-xl);
+    --line-height-heading-lg: var(--line-height-3xl);
+    --line-height-display:    var(--line-height-4xl);
 
-    /* Tint the native checkboxes, radios, and range sliders */
-    accent-color: var(--color-accent);
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
 
-    /* ---- Header chrome ---- */
-    --header-bg: var(--color-accent);
-    --header-text: light-dark(#ffffff, #f0f4f8);
+    /* Radii */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
 
-    /* ---- Theme toggle (consumed by theme-toggle.css) ---- */
-    --theme-toggle-bg: color-mix(in srgb, var(--header-text) 20%, var(--header-bg));
-    --theme-toggle-border: color-mix(in srgb, var(--header-text) 40%, var(--header-bg));
-    --theme-toggle-bg-hover: color-mix(in srgb, var(--header-text) 30%, var(--header-bg));
-    --theme-toggle-border-hover: color-mix(in srgb, var(--header-text) 55%, var(--header-bg));
+    /* Transitions */
+    --transition-base: 0.2s ease;
 
-    /* ---- Shadows ---- */
-    --shadow-color: light-dark(rgb(0 0 0 / 0.09), rgb(0 0 0 / 0.28));
-    --shadow-sm: 0 1px 2px 0 var(--shadow-color);
-    --shadow-md: 0 1px 3px 0 var(--shadow-color);
+    /* Icons */
+    --icon-size-sm: 24px;
+    --icon-size-md: 32px;
+
+    /* Focus */
+    --outline-width: 2px;
+
+    /* Shadows (layered elevation stacks).
+       color-scheme is set only in colors.css. Do not set it here: a second
+       declaration overrides the toggle's light/dark choice. */
+
+    /* Soft dark in light mode, deeper black in dark mode */
+    --shadow-color: light-dark(rgb(20 24 40 / 0.14), rgb(0 0 0 / 0.55));
+
+    /* Elevation 1: resting cards */
+    --shadow-sm:
+        0 1px 2px var(--shadow-color),
+        0 2px 4px var(--shadow-color);
+
+    /* Elevation 2: raised / hovered cards */
+    --shadow-md:
+        0 2px 4px var(--shadow-color),
+        0 8px 16px var(--shadow-color),
+        0 16px 32px var(--shadow-color);
 }
