@@ -1,0 +1,213 @@
+/* ========================================
+   RESUME
+   Screen styles first, then the print
+   stylesheet at the bottom of this file.
+   ======================================== */
+
+/* ---------- Screen ---------- */
+.resume {
+    max-inline-size: 52rem;
+    margin-inline: auto;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: clip;
+
+    .resume-header {
+        padding: var(--spacing-xl);
+        background: var(--header-bg);
+        /* --color-bg (not --header-text) keeps 4.5:1 contrast on the accent
+           band in both themes. */
+        color: var(--color-bg);
+
+        h1 {
+            font-size: var(--font-size-2xl);
+            line-height: var(--line-height-2xl);
+            color: inherit;
+        }
+
+        p {
+            margin-block-start: var(--spacing-xs);
+            font-size: var(--font-size-heading-sm);
+            line-height: var(--line-height-heading-sm);
+        }
+    }
+
+    .resume-contact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing-sm) var(--spacing-lg);
+        padding: var(--spacing-md) var(--spacing-xl);
+        list-style: none;
+        background: var(--color-surface-alt);
+        border-block-end: 1px solid var(--color-border);
+    }
+
+    .resume-body {
+        display: grid;
+        gap: var(--spacing-xl);
+        padding: var(--spacing-xl);
+
+        section h2 {
+            margin-block-end: var(--spacing-md);
+            padding-block-end: var(--spacing-xs);
+            border-block-end: 2px solid var(--color-accent);
+        }
+
+        ul {
+            padding-inline-start: 1.25rem;
+        }
+
+        li + li {
+            margin-block-start: var(--spacing-xs);
+        }
+    }
+
+    .resume-entry + .resume-entry {
+        margin-block-start: var(--spacing-lg);
+    }
+
+    .resume-entry h3 {
+        color: var(--color-text);
+    }
+
+    .resume-meta {
+        margin-block: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-caption);
+        line-height: var(--line-height-caption);
+        color: var(--color-text-muted);
+    }
+
+    .skill-groups {
+        display: grid;
+        gap: var(--spacing-sm);
+
+        dt {
+            font-weight: 700;
+            color: var(--color-text);
+        }
+
+        dd {
+            margin: 0;
+        }
+    }
+}
+
+/* ---------- Print ---------- */
+@page {
+    margin: 0.75in;
+}
+
+@media print {
+    /* Always print the light theme, even if the visitor chose dark mode.
+       This file is in the components layer, which beats the tokens layer. */
+    html {
+        color-scheme: light;
+    }
+
+    /* Hide chrome that does nothing on paper */
+    .site-bar,
+    .board-footer,
+    .theme-menu {
+        display: none;
+    }
+
+    /* Print typeface and sizes in pt */
+    body {
+        padding: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 11pt;
+        line-height: 1.4;
+        color: #000;
+        background: #fff;
+    }
+
+    /* Headings use the same print serif as the body */
+    :is(h1, h2, h3) {
+        font-family: inherit;
+    }
+
+    .resume {
+        max-inline-size: none;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+
+        .resume-header {
+            padding: 0.2in 0.3in;
+            /* The brand band carries meaning, so keep its background color.
+               Only this element needs it. */
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+
+            h1 {
+                font-size: 22pt;
+            }
+
+            p {
+                font-size: 12pt;
+            }
+        }
+
+        .resume-contact {
+            padding: 0.1in 0.3in;
+            font-size: 10pt;
+        }
+
+        .resume-body {
+            gap: 0.25in;
+            padding: 0.25in 0.3in 0;
+
+            section h2 {
+                font-size: 13pt;
+                color: var(--accent-700);
+                border-block-end-color: var(--accent-300);
+            }
+
+            /* Headings never sit alone at the bottom of a page */
+            section h2,
+            .resume-entry h3 {
+                break-after: avoid;
+            }
+
+            .resume-entry h3 {
+                font-size: 11.5pt;
+            }
+
+            .resume-meta {
+                font-size: 9.5pt;
+                color: #444;
+            }
+
+            p,
+            li {
+                orphans: 3;
+                widows: 3;
+            }
+        }
+
+        /* Keep each entry on one page */
+        .resume-entry {
+            break-inside: avoid;
+        }
+
+        .skill-groups dt {
+            font-size: 11pt;
+        }
+    }
+
+    /* Show where each link goes. Skips in-page anchors, mailto, and tel
+       links, whose text already is the address or number. */
+    a {
+        color: inherit;
+        text-decoration: underline;
+    }
+
+    a[href]:not([href^='#'], [href^='mailto:'], [href^='tel:'])::after {
+        content: " (" attr(href) ")";
+        font-size: 9pt;
+        font-weight: 400;
+        overflow-wrap: anywhere;
+    }
+}

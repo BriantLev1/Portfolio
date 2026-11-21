@@ -1,0 +1,49 @@
+/* ========================================
+   CONTACT FORM
+   Layout for the form on contact.html.
+   Base look of the controls (labels, inputs,
+   textarea, button, accent-color) lives in
+   base/elements.css.
+   ======================================== */
+.contact-form {
+    display: grid;
+    gap: var(--spacing-lg);
+    max-inline-size: 36rem;
+    margin-inline: auto;
+    padding: var(--spacing-xl);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+
+    .field {
+        display: grid;
+        gap: var(--spacing-xs);
+
+        label {
+            margin: 0;
+        }
+    }
+
+    .hint {
+        font-size: var(--font-size-caption);
+        line-height: var(--line-height-caption);
+        color: var(--color-text-muted);
+    }
+
+    .checkbox-row {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+
+        label {
+            margin: 0;
+            font-weight: 400;
+        }
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: flex-end;
+    }
+}

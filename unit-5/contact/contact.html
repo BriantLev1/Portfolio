@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briant Woolley - Contact</title>
+    <script src="../js/theme-preference.js"></script>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <div class="site-bar">
+        <a href="../index.html">&larr; Home</a>
+        <details class="theme-menu">
+            <summary class="theme-control">
+                <span class="visually-hidden">Color scheme</span>
+            </summary>
+            <div class="theme-extra" role="group" aria-label="Choose color scheme">
+                <label class="theme-control theme-pick" data-theme-pick="light">
+                    <input name="theme-preference" type="radio" value="light">
+                    <span aria-hidden="true">&#9788;&#65039;</span>
+                    <span class="visually-hidden">Light</span>
+                </label>
+                <label class="theme-control theme-pick" data-theme-pick="system">
+                    <input name="theme-preference" type="radio" value="system" checked>
+                    <span aria-hidden="true">&#9881;&#65039;</span>
+                    <span class="visually-hidden">System default</span>
+                </label>
+                <label class="theme-control theme-pick" data-theme-pick="dark">
+                    <input name="theme-preference" type="radio" value="dark">
+                    <span aria-hidden="true">&#127766;</span>
+                    <span class="visually-hidden">Dark</span>
+                </label>
+            </div>
+        </details>
+    </div>
+
+    <header class="board-header">
+        <h1>Contact</h1>
+        <p>Send me a message about a project, an opportunity, or a question.</p>
+    </header>
+
+    <main>
+        <form class="contact-form" action="#" method="post">
+            <div class="field">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" autocomplete="name" required>
+            </div>
+
+            <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+
+            <div class="field">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required aria-describedby="message-hint"></textarea>
+                <p class="hint" id="message-hint">The box grows as you type in browsers that support it.</p>
+            </div>
+
+            <div class="checkbox-row">
+                <input id="updates" name="updates" type="checkbox">
+                <label for="updates">Send me updates about new projects</label>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit">Send message</button>
+            </div>
+        </form>
+    </main>
+
+    <footer class="board-footer">
+        <p>&copy; 2026 Briant Woolley &middot; <a href="resume.html">View my resume</a></p>
+    </footer>
+</body>
+</html>
